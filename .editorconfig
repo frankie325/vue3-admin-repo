@@ -1,0 +1,22 @@
+# .editorconfig用来统一不同编辑器的编码风格，
+# https://editorconfig.org/
+
+root = true # 设定为true以后，搜索editorconfig到当前的文件就会停止
+ 
+[*] # 表示所有文件适用，如果prettier中设置的属性和.editorconfig冲突了，以.editorconfig优先
+charset=utf-8 # 设置文件字符集为 utf-8
+end_of_line=lf # 控制换行类型(lf | cr | crlf)
+insert_final_newline=true  # 始终在文件末尾插入一个新行
+indent_style=space # 缩进风格（tab | space）
+indent_size=2  # 缩进大小
+max_line_length = 100 # 最大行长
+
+[*.{yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
