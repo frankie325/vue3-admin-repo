@@ -7,6 +7,7 @@
     "preview": "vite preview",
     "lint:eslint": "eslint \"{src,mock}/**/*.{js,ts,vue,tsx}\" --fix --cache --cache-location node_modules/.cache/eslint/",
     "lint:stylelint": "stylelint \"**/*.{vue,less,postcss,css,html}\" --fix --cache --cache-location node_modules/.cache/stylelint/",
+    "lint:prettier": "prettier --write \"**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:lint-staged": "lint-staged",
     "commit": "git-cz",
     "prepare": "husky install"
@@ -42,6 +43,7 @@
     "postcss": "^8.4.13",
     "postcss-html": "^1.4.1",
     "postcss-less": "^6.0.0",
+    "prettier": "^2.6.2",
     "stylelint": "^14.8.2",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^7.0.0",

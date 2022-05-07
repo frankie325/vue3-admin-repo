@@ -15,13 +15,13 @@
        在 main.js 引入index.less
     
     4. 重新启动项目即可使用Tailwind CSS
-*/ 
+*/
 
 module.exports = {
-    // 未使用的样式将进行摇树优化
-    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
+  // 未使用的样式将进行摇树优化
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
