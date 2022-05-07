@@ -28,9 +28,9 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    'no-var': 'warn', // 使用var声明变量警告
-    'no-use-before-define': 'off', // 关闭在定义变量之前使用变量的错误提示
-    'no-unused-vars': 'error', // 未使用的变量错误提示
+    'no-var': 'warn', // 使用var声明变量则警告
+    // 'no-use-before-define': 'off', // 关闭在定义变量之前使用变量的错误提示
+    // 'no-unused-vars': 'error', // 未使用的变量错误提示
 
     // eslint-plugin-vue插件的rules配置：https://eslint.vuejs.org/rules/
     'vue/script-setup-uses-vars': 'error', // <template>中没有使用<script setup>中的变量，则标记为未使用
@@ -46,6 +46,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off', // 关闭空函数错误提示
     '@typescript-eslint/ban-ts-comment': 'off', // 关闭使用ts注释错误提示
     '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'error', // 未使用的变量错误提示
+    '@typescript-eslint/no-unused-vars': 'warn', // 未使用的变量错误提示
+    '@typescript-eslint/no-use-before-define': 'off', // 关闭在定义变量之前使用变量的错误提示
   },
 };

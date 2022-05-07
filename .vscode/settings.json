@@ -34,5 +34,8 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
     // "source.fixAll": true
-  }
+  },
+  "stylelint.enable": true,
+  // 设置给vue文件、html文件提供错误提示
+  "stylelint.validate": ["css", "less", "postcss", "html", "vue"]
 }

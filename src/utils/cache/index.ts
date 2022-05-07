@@ -21,8 +21,11 @@ export default webStorage;
 /**
  * @description: 创建WebStorage实例，并传入配置项
  */
-export const createStorage = (storage: Storage = sessionStorage, options: Options = {}) => create(createOptions(storage, options));
+export const createStorage = (storage: Storage = sessionStorage, options: Options = {}) =>
+  create(createOptions(storage, options));
 
-export const createLocalStorage = (options: Options = {}) => createStorage(localStorage, { ...options, timeout: DEFAULT_CACHE_TIME });
+export const createLocalStorage = (options: Options = {}) =>
+  createStorage(localStorage, { ...options, timeout: DEFAULT_CACHE_TIME });
 
-export const createSessionStorage = (options: Options = {}) => createStorage(sessionStorage, { ...options, timeout: DEFAULT_CACHE_TIME });
+export const createSessionStorage = (options: Options = {}) =>
+  createStorage(sessionStorage, { ...options, timeout: DEFAULT_CACHE_TIME });

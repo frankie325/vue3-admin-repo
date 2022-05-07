@@ -1,3 +1,4 @@
+let a;
 let obj = {
   name: 'kfg',
   age: 23,

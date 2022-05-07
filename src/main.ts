@@ -25,5 +25,4 @@ setupRouterGuard(router);
 
 app.mount('#app');
 
-const hello = 'hello';
-console.log(hello);
+let b;

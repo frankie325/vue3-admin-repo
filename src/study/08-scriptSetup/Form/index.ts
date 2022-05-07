@@ -1,7 +1,7 @@
-import Bar from "./Bar.vue";
-import Foo from "./Foo.vue";
+import Bar from './Bar.vue';
+import Foo from './Foo.vue';
 
 export default {
-    Bar,
-    Foo,
+  Bar,
+  Foo,
 };

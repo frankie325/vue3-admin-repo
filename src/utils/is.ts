@@ -1,16 +1,16 @@
 // 不是undefined，则为true
 export function isDef<T = unknown>(val?: T): val is T {
-    return typeof val !== "undefined";
+  return typeof val !== 'undefined';
 }
 
 // 是undefined，则为true
 export function isUnDef<T = unknown>(val?: T): val is T {
-    return !isDef(val);
+  return !isDef(val);
 }
 
 // 是null，则为true
 export function isNull(val: unknown): val is null {
-    return val === null;
+  return val === null;
 }
 
 // 是null并且是undefined，则为true
@@ -20,5 +20,5 @@ export function isNull(val: unknown): val is null {
 
 // 是null或者undefined，则为true
 export function isNullOrUnDef(val: unknown): val is null | undefined {
-    return isNull(val) || isUnDef(val);
+  return isNull(val) || isUnDef(val);
 }

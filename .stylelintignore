@@ -1,0 +1,5 @@
+# stylelint忽略的文件
+
+/dist/*
+/public/*
+public/*
