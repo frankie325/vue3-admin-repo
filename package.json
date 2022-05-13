@@ -5,9 +5,9 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint:eslint": "eslint \"{src,mock}/**/*.{js,ts,vue,tsx}\" --fix --cache --cache-location node_modules/.cache/eslint/",
+    "lint:eslint": "eslint \"**/*.{js,jsx,ts,tsx,d.ts,vue,tsx}\" --fix --cache --cache-location node_modules/.cache/eslint/",
     "lint:stylelint": "stylelint \"**/*.{vue,less,postcss,css,html}\" --fix --cache --cache-location node_modules/.cache/stylelint/",
-    "lint:prettier": "prettier --write \"**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:prettier": "prettier --write \"**/*.{js,jsx,json,ts,tsx,d.ts,css,less,scss,vue,html,md}\"",
     "lint:lint-staged": "lint-staged",
     "commit": "git-cz",
     "prepare": "husky install"
