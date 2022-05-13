@@ -1,13 +1,11 @@
 <template>
-  <div class="text-blue-500"
-    >换行哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或</div
-  >
-  <div class="text-blue-500" style="height: calc(10px + 20px)"></div>
+  <div class="relative w-full h-full px-4">
+    <AppLocalePicker
+      class="absolute text-black top-4 right-4 enter-x xl:text-gray-600"
+    ></AppLocalePicker>
+  </div>
 </template>
 
-<script>
-  export default {
-    methods: {},
-  };
+<script setup lang="ts">
+  import { AppLocalePicker } from '@/components/Application';
 </script>
-<script setup lang="ts"></script>
