@@ -1,8 +1,9 @@
 {
-  "name": "vue-admin",
+  "name": "vue3-admin",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
+    "serve": "npm run dev",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint:eslint": "eslint \"**/*.{js,jsx,ts,tsx,d.ts,vue,tsx}\" --fix --cache --cache-location node_modules/.cache/eslint/",
@@ -17,6 +18,7 @@
     "@vueuse/core": "^8.4.2",
     "ant-design-vue": "^3.2.0",
     "crypto-js": "^4.1.1",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.0.13",
     "vue": "^3.2.25",
     "vue-i18n": "^9.1.10",
@@ -27,6 +29,7 @@
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
     "@types/crypto-js": "^4.1.1",
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "^17.0.30",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",

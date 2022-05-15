@@ -11,5 +11,5 @@ export const cacheCipher = {
   iv: '@11111000001111_', // 密钥偏移量
 };
 
-// 是否使用加密系统缓存
+// 是否使用加密系统缓存，生产环境下才加密
 export const enableStorageEncryption = !isDevMode();

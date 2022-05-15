@@ -7,6 +7,7 @@ export const LOCALE: { [key: string]: LocaleType } = {
   EN_US: 'en',
 };
 
+// 国际化语言默认配置
 export const localeSetting: LocaleSetting = {
   showPicker: true,
   // 当前语言环境
@@ -16,3 +17,20 @@ export const localeSetting: LocaleSetting = {
   // 可用语言环境列表
   availableLocales: [LOCALE.ZH_CN, LOCALE.EN_US],
 };
+
+export interface LocaleMenu {
+  name: string;
+  value: string;
+}
+
+// 下拉菜单的切换语言选项
+export const localeList: LocaleMenu[] = [
+  {
+    name: '简体中文',
+    value: LOCALE.ZH_CN,
+  },
+  {
+    name: 'English',
+    value: LOCALE.EN_US,
+  },
+];

@@ -1,4 +1,4 @@
-// vscode插件设置
+// vscode插件设置，没有高亮的需要在全局setting.json中配置
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode", //  默认使用 prettier 作为格式化工具
   "editor.formatOnSave": true, //保存自动格式化
@@ -37,5 +37,20 @@
   },
   "stylelint.enable": true,
   // 设置给vue文件、html文件提供错误提示
-  "stylelint.validate": ["css", "less", "postcss", "html", "vue"]
+  "stylelint.validate": ["css", "less", "postcss", "html", "vue"],
+  // i18n-ally提示插件配置
+  "i18n-ally.localesPaths": ["src/locales/lang"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.{ext}",
+  "i18n-ally.enabledParsers": ["ts"],
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "zh-CN",
+  "i18n-ally.enabledFrameworks": ["vue", "react"],
+  // 解决vue文件使用路径别名没有提示
+  "path-intellisense.mappings": {
+    "@": "${workspaceRoot}/src",
+    "#": "${workspaceRoot}/types"
+  }
 }

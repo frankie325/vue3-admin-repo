@@ -23,3 +23,10 @@ export interface GlobEnvConfig {
   // Upload url
   VITE_GLOB_UPLOAD_URL?: string;
 }
+
+export interface menuSetting {
+  bgColor: String;
+}
+export interface ProjectConfig {
+  menuSetting: MenuSetting;
+}

@@ -6,23 +6,32 @@ import App from './App.vue';
 
 import 'ant-design-vue/dist/antd.css';
 
+import { initAppConfigStore } from '@/logics/initAppConfig';
+import { setupI18n } from '@/locales/setupl18n';
 import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
 
-const app = createApp(App);
+async function bootstrap() {
+  const app = createApp(App);
 
-app.use(Antd);
+  app.use(Antd);
+  // 请勿修改注册顺序
 
-// 请勿修改注册顺序
+  // 注册全局状态管理插件pinia
+  setupStore(app);
 
-// 注册全局状态管理插件pinia
-setupStore(app);
+  // 初始化pinia仓库状态
+  initAppConfigStore();
 
-// 注册路由
-setupRouter(app);
-setupRouterGuard(router);
+  // 注册国际化插件
+  await setupI18n(app);
 
-app.mount('#app');
+  // 注册路由
+  setupRouter(app);
+  setupRouterGuard(router);
 
-let b;
+  app.mount('#app');
+}
+
+bootstrap();

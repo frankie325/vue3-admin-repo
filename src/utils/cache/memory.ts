@@ -18,13 +18,14 @@ export class Memory<T = any, V = any> {
   constructor(alive = NOT_ALIVE) {
     // Unit second
     this.alive = alive * 1000;
+    this.cache = {};
   }
 
   get getCache() {
     return this.cache;
   }
 
-  setCache(cache) {
+  setCache(cache: { [key in keyof T]?: Cache<V> }) {
     this.cache = cache;
   }
 
@@ -61,7 +62,7 @@ export class Memory<T = any, V = any> {
     // expire过大，大于现在，则使用expire作为过期时间
     item.time = expire > now ? expire : now + expire; //更新过期时间
 
-    // 到达过期时间则清空缓存
+    // 经过一段时间后则清空缓存
     item.timeoutId = setTimeout(
       () => {
         this.remove(key);
@@ -70,5 +71,38 @@ export class Memory<T = any, V = any> {
     );
   }
 
-  remove<K extends keyof T>(key: K) {}
+  // 移除缓存
+  remove<K extends keyof T>(key: K) {
+    const item = this.get(key);
+    Reflect.deleteProperty(this.cache, key);
+    if (item) {
+      clearTimeout(item.timeoutId!);
+      return item.value;
+    }
+  }
+
+  // 更新缓存
+  resetCache(cache: { [K in keyof T]?: Cache<V> }) {
+    Object.keys(cache).forEach((key) => {
+      const k = key as keyof T;
+      const item = cache[k];
+      if (item && item.time) {
+        const now = new Date().getTime(); //当前时间
+        const expire = item.time; //过期时间
+        // 还没有超过期时间，才会重新设置缓存值
+        if (expire > now) {
+          this.set(k, item.value!, expire);
+        }
+      }
+    });
+  }
+
+  // 清空缓存
+  clear() {
+    Object.keys(this.cache).forEach((key) => {
+      const item = this.cache[key as keyof T];
+      item?.timeoutId && clearTimeout(item.timeoutId);
+    });
+    this.cache = {};
+  }
 }

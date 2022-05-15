@@ -1,21 +1,16 @@
 <template>
   <!-- <StudyVue3 /> -->
-  <AConfigProvider :get-popup-container="getPopupContainer">
+  <a-config-provider :locale="getAntdLocale">
     <AppProvider>
-      <RouterView />
+      <router-view />
     </AppProvider>
-  </AConfigProvider>
+  </a-config-provider>
 </template>
 
 <script setup lang="ts">
   import StudyVue3 from './study/index.vue';
   import { AppProvider } from '@/components/Application';
   import { useLocale } from '@/locales/useLocale';
-  useLocale();
-  function getPopupContainer(el, dialogContext) {
-    if (dialogContext) {
-      return dialogContext.getDialogWrap();
-    }
-    return document.body;
-  }
+
+  const { getAntdLocale } = useLocale();
 </script>

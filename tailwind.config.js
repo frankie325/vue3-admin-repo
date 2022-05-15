@@ -20,7 +20,16 @@
 module.exports = {
   // 未使用的样式将进行摇树优化
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: 'media',
   theme: {
+    // 重新设置项目断点
+    screens: {
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+      '2xl': '1600px',
+    },
     extend: {},
   },
   plugins: [],
