@@ -10,5 +10,5 @@ module.exports = {
   trailingComma: 'all', // 在多行逗号分隔的语法结构中，打印尾随逗号
   proseWrap: 'never',
   htmlWhitespaceSensitivity: 'strict', // 所有空格都被认为是重要的，不会随意格式化
-  endOfLine: 'lf', // 行尾风格使用 \n 换行
+  endOfLine: 'auto', // 因为git提交时会自动把换行类型CRLF 替换为 LF，拉取代码时又会把LF 替换为 CRLF，所以设置成auto，则不会有错误提示
 };

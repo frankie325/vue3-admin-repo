@@ -1,5 +1,5 @@
 import type { InjectionKey, Ref } from 'vue';
-import { createContext } from '@/hooks/core/useContext';
+import { createContext, useContext } from '@/hooks/core/useContext';
 
 export interface AppProviderContextProps {
   prefixCls: Ref<string>;
@@ -13,4 +13,11 @@ const key: InjectionKey<AppProviderContextProps> = Symbol();
  */
 export function createAppProviderContext(context: AppProviderContextProps) {
   return createContext<AppProviderContextProps>(context, key);
+}
+
+/**
+ * @description: 使用注入到AppProvider组件中的数据
+ */
+export function useAppProviderContext() {
+  return useContext<AppProviderContextProps>(key);
 }

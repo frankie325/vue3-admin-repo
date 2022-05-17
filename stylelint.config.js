@@ -27,7 +27,7 @@ module.exports = {
     ],
     // css属性的顺序
     // 'order/properties-order': ['width', 'height'],
-    // 形如@media则为at-rule，忽略下述at-rule的报错提示
+    // 忽略下述以@符号开头的报错提示
     'at-rule-no-unknown': [
       true,
       {

@@ -24,8 +24,14 @@ export default webStorage;
 export const createStorage = (storage: Storage = sessionStorage, options: Options = {}) =>
   create(createOptions(storage, options));
 
+/**
+ * @description: 创建WebStorage实例，使用localStorage存储
+ */
 export const createLocalStorage = (options: Options = {}) =>
   createStorage(localStorage, { ...options, timeout: DEFAULT_CACHE_TIME });
 
+/**
+ * @description: 创建WebStorage实例，使用sessionStorage存储
+ */
 export const createSessionStorage = (options: Options = {}) =>
   createStorage(sessionStorage, { ...options, timeout: DEFAULT_CACHE_TIME });

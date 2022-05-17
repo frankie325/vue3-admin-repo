@@ -28,5 +28,9 @@ export interface menuSetting {
   bgColor: String;
 }
 export interface ProjectConfig {
+  // 是否显示配置按钮
+  showSettingButton: boolean;
+  // 是否显示主题切换按钮
+  showDarkModeToggle: boolean;
   menuSetting: MenuSetting;
 }

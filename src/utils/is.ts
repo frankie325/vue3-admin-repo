@@ -1,14 +1,20 @@
-// 不是undefined，则为true
+/**
+ * @description: 不是undefined，则为true
+ */
 export function isDef<T = unknown>(val?: T): val is T {
   return typeof val !== 'undefined';
 }
 
-// 是undefined，则为true
+/**
+ * @description: 是undefined，则为true
+ */
 export function isUnDef<T = unknown>(val?: T): val is T {
   return !isDef(val);
 }
 
-// 是null，则为true
+/**
+ * @description: 是null，则为true
+ */
 export function isNull(val: unknown): val is null {
   return val === null;
 }
@@ -18,7 +24,22 @@ export function isNull(val: unknown): val is null {
 //     return isNull(val) && isUnDef(val);
 // }
 
-// 是null或者undefined，则为true
+/**
+ * @description: 是null或者undefined，则为true
+ */
 export function isNullOrUnDef(val: unknown): val is null | undefined {
   return isNull(val) || isUnDef(val);
+}
+
+const toString = Object.prototype.toString;
+
+export function is(val: unknown, type: string) {
+  return toString.call(val) === `[object ${type}]`;
+}
+
+/**
+ * @description: 是否为对象
+ */
+export function isObject(val: any): val is Record<any, any> {
+  return val !== null && is(val, 'Object');
 }

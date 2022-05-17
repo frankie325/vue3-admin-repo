@@ -49,5 +49,6 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'warn', // 未使用的变量错误提示
     '@typescript-eslint/no-use-before-define': 'off', // 关闭在定义变量之前使用变量的错误提示
     '@typescript-eslint/no-non-null-assertion': 'off', // 关闭使用非空断言的警告提示
+    '@typescript-eslint/no-var-requires': 'off', // 关闭使用require语句的错误提示
   },
 };

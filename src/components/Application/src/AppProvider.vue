@@ -19,7 +19,7 @@
       // 监听浏览器宽度的变化
       createBreakpointListen(({ screenMap, sizeEnum, width }) => {
         const lgWidth = screenMap.get(sizeEnum.LG);
-        // 当断电宽度小于等于LG时，为移动端
+        // 当断点宽度小于等于LG时，为移动端
         if (lgWidth) {
           isMobile.value = width.value <= lgWidth;
         }

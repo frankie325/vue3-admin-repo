@@ -17,7 +17,7 @@ export class Memory<T = any, V = any> {
 
   constructor(alive = NOT_ALIVE) {
     // Unit second
-    this.alive = alive * 1000;
+    this.alive = alive * 1000; //默认缓存时间
     this.cache = {};
   }
 

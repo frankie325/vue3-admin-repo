@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown :trigger="['hover']">
+  <a-dropdown :trigger="['click']">
     <a class="ant-dropdown-link" @click.prevent>
       文
       <CaretDownOutlined />
