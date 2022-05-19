@@ -11,6 +11,19 @@ export interface LocaleSetting {
   availableLocales: LocaleType[];
 }
 
+export interface GlobConfig {
+  // 项目标题
+  title: string;
+
+  apiUrl: string;
+
+  uploadUrl?: string;
+
+  urlPrefix?: string;
+  // 项目简称
+  shortName: string;
+}
+
 export interface GlobEnvConfig {
   // 项目标题
   VITE_GLOB_APP_TITLE: string;

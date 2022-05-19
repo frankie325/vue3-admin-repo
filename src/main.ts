@@ -1,10 +1,11 @@
-import './design/index.less';
-
 import { createApp } from 'vue';
-import Antd from 'ant-design-vue';
 import App from './App.vue';
 
-import 'ant-design-vue/dist/antd.css';
+// 先引入tailwind的样式，否则与ant-design-vue有冲突
+import './design/index.less';
+// 全局引入ant-design-vue
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.less';
 
 import { initAppConfigStore } from '@/logics/initAppConfig';
 import { setupI18n } from '@/locales/setupl18n';

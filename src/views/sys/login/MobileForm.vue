@@ -7,6 +7,7 @@
           size="large"
           v-model:value="formData.mobile"
           :placeholder="t('sys.login.mobile')"
+          class="fix-auto-fill"
         />
       </a-form-item>
       <a-form-item class="enter-x">

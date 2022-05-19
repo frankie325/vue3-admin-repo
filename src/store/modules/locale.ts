@@ -22,6 +22,7 @@ export const useLocaleStore = defineStore({
     localeInfo: lsLocaleSetting, //初始化时为默认配置
   }),
   getters: {
+    // 是否显示黑暗模式切换开关
     getShowPicker(): boolean {
       return !!this.localeInfo?.showPicker;
     },

@@ -21,5 +21,12 @@ export default {
     backSignIn: 'Back sign in',
     scanSign: `scanning the code to complete the login`,
     policy: 'I agree to the xxx Privacy Policy',
+
+    accountPlaceholder: 'Please input username',
+    passwordPlaceholder: 'Please input password',
+    smsPlaceholder: 'Please input sms code',
+    mobilePlaceholder: 'Please input mobile',
+    policyPlaceholder: 'Register after checking',
+    diffPwd: 'The two passwords are inconsistent',
   },
 };

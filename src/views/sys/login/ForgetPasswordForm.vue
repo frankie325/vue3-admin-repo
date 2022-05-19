@@ -7,6 +7,7 @@
           size="large"
           v-model:value="formData.account"
           :placeholder="t('sys.login.userName')"
+          class="fix-auto-fill"
         />
       </a-form-item>
       <a-form-item name="mobile" class="enter-x">
@@ -14,6 +15,7 @@
           size="large"
           v-model:value="formData.mobile"
           :placeholder="t('sys.login.mobile')"
+          class="fix-auto-fill"
         />
       </a-form-item>
       <a-form-item class="enter-x">

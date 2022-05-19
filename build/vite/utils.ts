@@ -1,5 +1,5 @@
 /**
- * @description: // 将环境变量值为字符串的添加到process.env中
+ * @description: 将环境变量值为字符串的添加到process.env中
  * @return {*} 返回该项目对应环境下的所有定义的环境变量，转为js值
  */
 export function wrapperEnv(envConf: Recordable): ViteEnv {

@@ -21,5 +21,12 @@ export default {
     backSignIn: '返回',
     scanSign: `扫码后点击"确认"，即可完成登录`,
     policy: '我同意xxx隐私政策',
+
+    accountPlaceholder: '请输入账号',
+    passwordPlaceholder: '请输入密码',
+    smsPlaceholder: '请输入验证码',
+    mobilePlaceholder: '请输入手机号码',
+    policyPlaceholder: '勾选后才能注册',
+    diffPwd: '两次输入密码不一致',
   },
 };

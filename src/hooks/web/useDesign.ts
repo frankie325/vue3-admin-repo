@@ -1,5 +1,8 @@
 import { useAppProviderContext } from '@/components/Application/src/useAppContext';
 
+/**
+ * @description: 生成前缀样式
+ */
 export function useDesign(scope: string) {
   const values = useAppProviderContext();
 

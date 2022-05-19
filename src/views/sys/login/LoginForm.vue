@@ -1,11 +1,19 @@
 <template>
   <LoginFormTitle class="enter-x" v-show="getShow" />
-  <a-form class="p-4 enter-x" :model="formData" v-show="getShow">
+  <a-form
+    ref="formRef"
+    class="p-4 enter-x"
+    :model="formData"
+    :rules="getFormRules"
+    v-show="getShow"
+    @keypress.enter="handleLogin"
+  >
     <a-form-item name="account" class="enter-x">
       <a-input
         size="large"
         v-model:value="formData.account"
         :placeholder="t('sys.login.userName')"
+        class="fix-auto-fill"
       />
     </a-form-item>
     <a-form-item name="password" class="enter-x">
@@ -13,6 +21,7 @@
         size="large"
         v-model:value="formData.password"
         :placeholder="t('sys.login.password')"
+        class="fix-auto-fill"
       />
     </a-form-item>
 
@@ -34,7 +43,9 @@
     </a-row>
 
     <a-form-item class="enter-x">
-      <a-button type="primary" block size="large">{{ t('sys.login.loginButton') }}</a-button>
+      <a-button type="primary" block size="large" @click="handleLogin">{{
+        t('sys.login.loginButton')
+      }}</a-button>
     </a-form-item>
     <a-row class="enter-x" :gutter="6">
       <a-col :md="8" :xs="24">
@@ -56,7 +67,7 @@
 
     <a-divider :plain="true" class="enter-x">其他登录方式</a-divider>
 
-    <div class="flex justify-evenly enter-x text-xl">
+    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <GithubFilled />
       <WechatFilled />
       <AlipayCircleFilled />
@@ -78,7 +89,8 @@
   } from '@ant-design/icons-vue';
 
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { LoginStateEnum, useLoginState } from './useLogin';
+  import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
+  import { useDesign } from '@/hooks/web/useDesign';
 
   const { t } = useI18n();
 
@@ -88,8 +100,18 @@
 
   const rememberMe = ref(false);
 
+  const { prefixCls } = useDesign('login');
+
+  const formRef = ref();
   const formData = reactive({
     account: 'admin',
     password: '123456',
   });
+  const { getFormRules } = useFormRules();
+  const { validForm } = useFormValid(formRef);
+
+  async function handleLogin() {
+    const data = await validForm();
+    if (!data) return;
+  }
 </script>

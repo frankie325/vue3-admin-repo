@@ -13,6 +13,8 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
 
+    "allowJs": true,
+    "noImplicitAny": true, // 隐式含有any类型，则错误提示
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
     // "noImplicitAny": false,
@@ -33,6 +35,7 @@
     "types/**/*.d.ts",
     "build/**/*.ts",
     "build/**/*.d.ts",
+    "mock/**/*.ts",
     "vite.config.ts"
   ],
   // 当解析include选项时，需要忽略的文件列表

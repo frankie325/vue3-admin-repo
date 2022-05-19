@@ -7,7 +7,7 @@ import { PROJ_CFG_KEY } from '@/enums/cacheEnum';
 import { deepMerge } from '@/utils';
 import projectSetting from '@/settings/projectSetting';
 import { ThemeEnum } from '@/enums/appEnum';
-import { updateDarkTheme } from './theme/drak';
+import { updateDarkTheme } from './theme/dark';
 /**
  * @description:  初始化pinia仓库状态
  */
