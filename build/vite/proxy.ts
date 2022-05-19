@@ -13,7 +13,16 @@ const httpsRE = /^https:\/\//;
 // ];
 export function createProxy(list: ProxyList = []) {
   console.log(list);
-  const ret: ProxyTargetList = {};
+  const ret: ProxyTargetList = {
+    '/api': {
+      target: 'http://localhost:3000',
+      rewrite: (path) => {
+        console.log(path);
+        return path.replace(/^\/api/, '');
+      },
+      changeOrigin: true,
+    },
+  };
   for (const [prefix, target] of list) {
     console.log(prefix, target);
 
@@ -26,4 +35,6 @@ export function createProxy(list: ProxyList = []) {
       ...(isHttps ? { secure: false } : {}),
     };
   }
+
+  return ret;
 }
