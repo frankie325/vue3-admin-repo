@@ -1,6 +1,9 @@
 import type { GlobConfig } from '#/config';
 import { getAppEnvConfig } from '@/utils/env';
 
+/**
+ * @description: 使用项目全局环境变量
+ */
 export const useGlobSetting = (): Readonly<GlobConfig> => {
   const {
     VITE_GLOB_APP_TITLE,

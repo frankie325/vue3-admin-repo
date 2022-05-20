@@ -44,7 +44,7 @@ const fakeCodeList: any = {
   '2': ['2000', '4000', '6000'],
 };
 
-// 当发出的请求匹配到下面的url会被mock拦截，顺序在开发服务器代理之前
+// axios请求地址以/basic-api开头，则会被mock拦截，顺序在开发服务器代理之前
 export default [
   {
     url: '/basic-api/login',

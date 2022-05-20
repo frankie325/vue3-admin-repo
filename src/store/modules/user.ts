@@ -26,6 +26,9 @@ export const useUserStore = defineStore({
       return this.token || '';
     },
   },
+  actions: {
+    async login() {},
+  },
 });
 
 export function useUserStoreWithOut() {

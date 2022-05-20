@@ -23,7 +23,7 @@ export function getStorageShortName() {
 }
 
 /**
- * @description: 获取APP全局环境变量
+ * @description: 获取项目全局环境变量
  */
 export function getAppEnvConfig() {
   const ENV_NAME = getConfigFileName(import.meta.env);
