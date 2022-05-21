@@ -1,4 +1,5 @@
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
+import type { AxiosResponse } from 'axios';
 
 import { clone } from 'lodash-es';
 
@@ -9,6 +10,14 @@ import { useGlobSetting } from '@/hooks/setting/';
 import { isString } from '@/utils/is';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { setObjToUrlParams } from '@/utils';
+import { getToken } from '@/utils/auth';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
+import { useMessage } from '@/hooks/web/useMessage';
+import { checkStatus } from './checkStatus';
+import { AxiosRetry } from '@/utils/http/axios/axiosRetry';
+
+const { createMessage, createErrorModal } = useMessage();
 
 const globSetting = useGlobSetting();
 
@@ -74,8 +83,86 @@ const transform: AxiosTransform = {
         config.params = undefined;
       }
     }
-
     return config;
+  },
+
+  /**
+   * @description: 请求拦截器处理
+   */
+  requestInterceptors: (config, options) => {
+    const token = getToken();
+    // 将token添加到请求头
+    if (token && (config as Recordable).requestOptions?.withToken !== false) {
+      (config as Recordable).headers.Authorization = options.authenticationScheme
+        ? `${options.authenticationScheme} ${token}`
+        : token;
+    }
+    return config;
+  },
+
+  /**
+   * @description: 请求之前的错误拦截处理
+   */
+  requestInterceptorsCatch(error) {
+    throw error;
+  },
+
+  /**
+   * @description: 响应拦截处理
+   */
+  responseInterceptors: (res: AxiosResponse<any>) => {
+    return res;
+  },
+
+  /**
+   * @description: 响应错误处理
+   */
+  responseInterceptorsCatch: (axiosInstance, error) => {
+    const { t } = useI18n();
+    const errorLogStore = useErrorLogStoreWithOut();
+    errorLogStore.addAjaxErrorInfo(error); // 收集错误信息
+
+    // 开始处理错误信息
+    const { response, code, message, config } = error || {};
+    const errorMessageMode = config?.requestOptions?.errorMessageMode || 'none'; // 错误消息提示类型
+
+    const msg: string = response?.data?.error?.message ?? '';
+    const err: string = error?.toString?.() ?? '';
+    let errMessage = '';
+    debugger;
+
+    try {
+      if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
+        errMessage = t('sys.api.apiTimeoutMessage');
+      }
+
+      if (err?.includes('Network Error')) {
+        errMessage = t('sys.api.networkExceptionMsg');
+      }
+
+      if (errMessage) {
+        if (errorMessageMode === 'modal') {
+          createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });
+        } else if (errorMessageMode === 'message') {
+          createMessage.error(errMessage);
+        }
+        return Promise.reject(error);
+      }
+    } catch (error) {
+      throw new Error(error as unknown as string);
+    }
+
+    // 状态码处理
+    checkStatus(error?.response?.status, msg, errorMessageMode);
+
+    // 添加自动重试机制 保险起见 只针对GET请求
+    const retryRequest = new AxiosRetry();
+    const { isOpenRetry } = config.requestOptions.retryRequest;
+    config.method?.toUpperCase() === RequestEnum.GET &&
+      isOpenRetry &&
+      // @ts-ignore
+      retryRequest.retry(axiosInstance, error);
+    return Promise.reject(error);
   },
 };
 
@@ -86,7 +173,8 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
     deepMerge(
       {
-        // HTTP 身份验证
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
+        // http身份验证方案
         authenticationScheme: '',
         // 超时时间
         timeout: 10 * 1000,
@@ -112,17 +200,17 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           apiUrl: globSetting.apiUrl,
           // 接口拼接地址
           urlPrefix: globSetting.urlPrefix,
-          //  是否加入时间戳
+          // 是否加入时间戳
           joinTime: true,
-          // 忽略重复请求
-          ignoreCancelToken: true,
+          // 是否默认添加CancelToken配置
+          isSetCancelToken: false,
           // 是否携带token
           withToken: true,
           // 添加自动重试机制 保险起见 只针对GET请求
           retryRequest: {
             isOpenRetry: true,
-            count: 5,
-            waitTime: 100,
+            count: 5, // 最大尝试次数
+            waitTime: 100, // 重试的时间间隔
           },
         },
       },

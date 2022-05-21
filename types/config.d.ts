@@ -1,7 +1,11 @@
+import { CacheTypeEnum } from '@/enums/cacheEnum';
+import { SessionTimeoutProcessingEnum } from '@/enums/appEnum';
+
 // 国际化语言设置接口
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
 
 export interface LocaleSetting {
+  // 是否显示语言切换按钮
   showPicker: boolean;
   // 语言环境
   locale: LocaleType;
@@ -45,5 +49,14 @@ export interface ProjectConfig {
   showSettingButton: boolean;
   // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
+
   menuSetting: MenuSetting;
+  // 权限缓存类型
+  permissionCacheType: CacheTypeEnum;
+
+  // 是否收集错误信息
+  useErrorHandle: boolean;
+
+  // 会话超时处理方案
+  sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
 }

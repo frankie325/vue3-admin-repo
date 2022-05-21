@@ -1,3 +1,6 @@
+/**
+ * @description: 请求错误时的模态框类型
+ */
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 
 /**
@@ -23,7 +26,7 @@ export interface RequestOptions {
   errorMessageMode?: ErrorMessageMode;
   // Whether to add a timestamp
   joinTime?: boolean;
-  ignoreCancelToken?: boolean;
+  isSetCancelToken?: boolean;
   // Whether to send token in header
   withToken?: boolean;
   // 请求重试机制
@@ -40,6 +43,26 @@ export interface Result<T = any> {
   type: 'success' | 'error' | 'warning';
   message: string;
   result: T;
+}
+
+// Error-log information
+export interface ErrorLogInfo {
+  // Type of error
+  type: ErrorTypeEnum;
+  // Error file
+  file: string;
+  // Error name
+  name?: string;
+  // Error message
+  message: string;
+  // Error stack
+  stack?: string;
+  // Error detail
+  detail: string;
+  // Error url
+  url: string;
+  // Error time
+  time?: string;
 }
 
 // multipart/form-data: upload file

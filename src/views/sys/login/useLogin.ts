@@ -2,7 +2,8 @@ import type { Rule, RuleObject } from 'ant-design-vue/lib/form/interface';
 import type { Ref } from 'vue';
 
 import { computed, ref, unref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { useI18n } from '@/hooks/web/useI18n';
+
 // 登陆状态
 export enum LoginStateEnum {
   LOGIN, //登录

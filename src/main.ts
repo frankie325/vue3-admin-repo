@@ -8,7 +8,7 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.less';
 
 import { initAppConfigStore } from '@/logics/initAppConfig';
-import { setupI18n } from '@/locales/setupl18n';
+import { setupI18n } from '@/locales/setupI18n';
 import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';

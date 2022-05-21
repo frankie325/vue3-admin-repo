@@ -79,7 +79,8 @@
 
 <script setup lang="ts">
   import { ref, reactive, computed, unref } from 'vue';
-  import { useI18n } from 'vue-i18n';
+  import { useI18n } from '@/hooks/web/useI18n';
+
   import {
     GithubFilled,
     WechatFilled,
@@ -91,6 +92,7 @@
   import LoginFormTitle from './LoginFormTitle.vue';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '@/hooks/web/useDesign';
+  import { useUserStore } from '@/store/modules/user';
 
   const { t } = useI18n();
 
@@ -103,15 +105,29 @@
   const { prefixCls } = useDesign('login');
 
   const formRef = ref();
+  const loading = ref(false);
+
   const formData = reactive({
     account: 'admin',
     password: '123456',
   });
+
   const { getFormRules } = useFormRules();
   const { validForm } = useFormValid(formRef);
+
+  const userStore = useUserStore();
 
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;
+
+    try {
+      loading.value = true;
+      const userInfo = await userStore.login({
+        password: data.password,
+        username: data.account,
+        mode: 'none', //不要默认的错误提示
+      });
+    } catch (error) {}
   }
 </script>

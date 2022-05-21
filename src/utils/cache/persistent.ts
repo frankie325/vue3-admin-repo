@@ -53,4 +53,6 @@ export class Persistent {
     localMemory.set(key, toRaw(value));
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
+
+  static getSession() {}
 }

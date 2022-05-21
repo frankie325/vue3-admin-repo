@@ -23,7 +23,7 @@
 </template>
 <script setup lang="ts">
   import { ref, reactive, computed, unref } from 'vue';
-  import { useI18n } from 'vue-i18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   import LoginFormTitle from './LoginFormTitle.vue';
 

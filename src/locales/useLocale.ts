@@ -1,7 +1,7 @@
 import type { LocaleType } from '#/config';
 import { computed, unref } from 'vue';
 
-import { i18n } from './setupl18n';
+import { i18n } from './setupI18n';
 import { useLocaleStoreWithOut } from '@/store/modules/locale';
 import { loadLocalePool, setHtmlPageLang } from './helper';
 

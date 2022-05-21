@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia';
 import type { UserInfo } from '#/store';
 import { RoleEnum } from '@/enums/roleEnum';
-
+import { LoginParams } from '@/api/sys/userModel';
+import { ErrorMessageMode } from '#/axios';
+import { loginApi } from '@/api/user';
+import { store } from '@/store';
 interface UserState {
   userInfo: Nullable<UserInfo>;
   token?: string;
@@ -27,10 +30,21 @@ export const useUserStore = defineStore({
     },
   },
   actions: {
-    async login() {},
+    setToken(info: string | undefined) {},
+    setSessionTimeout(flag: boolean) {},
+    async login(
+      params: LoginParams & {
+        goHome?: boolean;
+        mode?: ErrorMessageMode;
+      },
+    ) {
+      const { goHome = true, mode, ...loginParams } = params;
+      const data = await loginApi(loginParams, mode);
+    },
+    async logout(goLogin = false) {},
   },
 });
 
 export function useUserStoreWithOut() {
-  return useUserStore();
+  return useUserStore(store);
 }

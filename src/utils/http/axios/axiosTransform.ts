@@ -1,7 +1,7 @@
 /**
  * Data processing class, can be configured according to the project
  */
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import type { RequestOptions, Result } from '#/axios';
 
 /**
@@ -39,17 +39,15 @@ export abstract class AxiosTransform {
   ) => AxiosRequestConfig;
 
   /**
-   * @description: 请求之后的拦截器
-   */
-  responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>;
-
-  /**
    * @description: 请求之前的拦截器错误处理
    */
-  requestInterceptorsCatch?: (error: Error) => void;
-
+  requestInterceptorsCatch?: (error: any) => void;
   /**
-   * @description: 请求之后的拦截器错误处理
+   * @description: 响应拦截处理
    */
-  responseInterceptorsCatch?: (axiosInstance: AxiosResponse, error: Error) => void;
+  responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>;
+  /**
+   * @description: 响应错误处理
+   */
+  responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: any) => void;
 }
