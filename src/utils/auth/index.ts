@@ -11,7 +11,18 @@ export function getToken() {
   return getAuthCache(TOKEN_KEY);
 }
 
+/**
+ * @description: 获取权限缓存
+ */
 export function getAuthCache<T>(key: BasicKeys) {
   const fn = isLocal ? Persistent.getLocal : Persistent.getSession;
   return fn(key) as T;
+}
+
+/**
+ * @description: 将用户权限缓存到本地
+ */
+export function setAuthCache(key: BasicKeys, value: any) {
+  const fn = isLocal ? Persistent.setLocal : Persistent.setSession;
+  return fn(key, value, true);
 }

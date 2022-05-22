@@ -1,5 +1,5 @@
 /**
- * @description: Request result set
+ * @description: 后台code字段，根据后台定义去设置
  */
 export enum ResultEnum {
   SUCCESS = 0,

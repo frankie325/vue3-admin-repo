@@ -17,6 +17,7 @@ import {
   MULTIPLE_TABS_KEY,
 } from '@/enums/cacheEnum';
 import { createLocalStorage, createSessionStorage } from './index';
+
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
   [USER_INFO_KEY]: UserInfo;
@@ -41,18 +42,35 @@ const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
 export class Persistent {
+  /**
+   * @description: 获取缓存
+   */
   static getLocal<T>(key: LocalKeys) {
     return localMemory.get(key)?.value as Nullable<T>;
   }
 
   /**
    * @description: 设置缓存
-   * @param immediate 是否存储到本地
+   * @param immediate 是否存储到localStorage
    */
   static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {
     localMemory.set(key, toRaw(value));
     immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
   }
 
-  static getSession() {}
+  /**
+   * @description: 获取缓存
+   */
+  static getSession<T>(key: SessionKeys) {
+    return sessionMemory.get(key)?.value as Nullable<T>;
+  }
+
+  /**
+   * @description: 设置缓存
+   * @param immediate 是否存储到sessionStorage
+   */
+  static setSession(key: SessionKeys, value: SessionStore[SessionKeys], immediate = false): void {
+    sessionMemory.set(key, toRaw(value));
+    immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
+  }
 }

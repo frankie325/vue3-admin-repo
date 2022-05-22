@@ -15,23 +15,12 @@ export interface CreateAxiosOptions extends AxiosRequestConfig {
 
 export abstract class AxiosTransform {
   /**
-   * @description: Process configuration before request
-   * @description: Process configuration before request
+   * @description: 请求发送之前处理
    */
   beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
   /**
-   * @description: Request successfully processed
-   */
-  transformRequestHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
-
-  /**
-   * @description: 请求失败处理
-   */
-  requestCatchHook?: (e: Error, options: RequestOptions) => Promise<any>;
-
-  /**
-   * @description: 请求之前的拦截器
+   * @description: 请求拦截器处理
    */
   requestInterceptors?: (
     config: AxiosRequestConfig,
@@ -39,15 +28,27 @@ export abstract class AxiosTransform {
   ) => AxiosRequestConfig;
 
   /**
-   * @description: 请求之前的拦截器错误处理
+   * @description: 请求拦截器错误处理
    */
-  requestInterceptorsCatch?: (error: any) => void;
+  requestInterceptorsCatch?: (error: Error) => void;
+
   /**
    * @description: 响应拦截处理
    */
-  responseInterceptors?: (res: AxiosResponse<any>) => AxiosResponse<any>;
+  responseInterceptors?: (res: AxiosResponse<Result>) => AxiosResponse<Result>;
+
   /**
-   * @description: 响应错误处理
+   * @description: 响应拦截器错误处理
    */
-  responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: any) => void;
+  responseInterceptorsCatch?: (axiosInstance: AxiosInstance, error: Error) => void;
+
+  /**
+   * @description: 处理响应数据
+   */
+  transformRequestHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
+
+  /**
+   * @description: 请求失败处理
+   */
+  requestCatchHook?: (e: Error, options: RequestOptions) => Promise<any>;
 }

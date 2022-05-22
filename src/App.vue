@@ -11,13 +11,10 @@
   import StudyVue3 from './study/index.vue';
   import { AppProvider } from '@/components/Application';
   import { useLocale } from '@/locales/useLocale';
-  import axios from 'axios';
-  import qs from 'qs';
-
+  // import { defHttp } from '@/utils/http/axios';
   const { getAntdLocale } = useLocale();
 
-  axios({
-    method: 'post',
-    url: '/basic-api/login',
-  });
+  // defHttp.get({
+  //   url: '/api/about',
+  // });
 </script>

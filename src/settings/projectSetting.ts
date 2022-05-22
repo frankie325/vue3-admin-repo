@@ -1,6 +1,6 @@
 import type { ProjectConfig } from '#/config';
 import { CacheTypeEnum } from '@/enums/cacheEnum';
-import { SessionTimeoutProcessingEnum } from '@/enums/appEnum';
+import { SessionTimeoutProcessingEnum, PermissionModeEnum } from '@/enums/appEnum';
 
 const setting: ProjectConfig = {
   showSettingButton: true,
@@ -14,6 +14,8 @@ const setting: ProjectConfig = {
   permissionCacheType: CacheTypeEnum.LOCAL,
 
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
+
+  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
 };
 
 export default setting;

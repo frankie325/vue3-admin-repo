@@ -38,6 +38,8 @@ export interface RetryRequest {
   count: number;
   waitTime: number;
 }
+
+// 响应数据格式，可根据后台修改
 export interface Result<T = any> {
   code: number;
   type: 'success' | 'error' | 'warning';

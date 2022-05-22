@@ -10,7 +10,7 @@ const error = createMessage.error!;
 const stp = projectSetting.sessionTimeoutProcessing;
 
 /**
- * @description: 状态码的处理
+ * @description: 响应状态码处理
  */
 export function checkStatus(
   status: number,

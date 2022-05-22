@@ -1,6 +1,7 @@
 import type { ProjectConfig } from '#/config';
 
 import { defineStore } from 'pinia';
+import { store } from '@/store';
 
 import { ThemeEnum } from '@/enums/appEnum';
 import { Persistent } from '@/utils/cache/persistent';
@@ -27,12 +28,21 @@ export const useAppStore = defineStore({
     getDarkMode(): 'light' | 'drak' | string {
       return this.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode;
     },
+    // 获取项目配置
+    getProjectConfig(): ProjectConfig {
+      return this.projectConfig || ({} as ProjectConfig);
+    },
   },
   actions: {
-    // 存储项目配置
+    // 存储项目配置，项目初始化时调用
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config);
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
   },
 });
+
+// 在setup外部使用仓库
+export function useAppStoreWithOut() {
+  return useAppStore(store);
+}

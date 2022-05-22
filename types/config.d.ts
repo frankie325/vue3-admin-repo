@@ -1,5 +1,5 @@
 import { CacheTypeEnum } from '@/enums/cacheEnum';
-import { SessionTimeoutProcessingEnum } from '@/enums/appEnum';
+import { PermissionModeEnum, SessionTimeoutProcessingEnum } from '@/enums/appEnum';
 
 // 国际化语言设置接口
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
@@ -53,7 +53,8 @@ export interface ProjectConfig {
   menuSetting: MenuSetting;
   // 权限缓存类型
   permissionCacheType: CacheTypeEnum;
-
+  // 权限模式
+  permissionMode: PermissionModeEnum;
   // 是否收集错误信息
   useErrorHandle: boolean;
 

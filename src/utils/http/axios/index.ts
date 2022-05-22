@@ -1,5 +1,4 @@
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
-import type { AxiosResponse } from 'axios';
 
 import { clone } from 'lodash-es';
 
@@ -16,7 +15,7 @@ import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 import { useMessage } from '@/hooks/web/useMessage';
 import { checkStatus } from './checkStatus';
 import { AxiosRetry } from '@/utils/http/axios/axiosRetry';
-
+import { useUserStoreWithOut } from '@/store/modules/user';
 const { createMessage, createErrorModal } = useMessage();
 
 const globSetting = useGlobSetting();
@@ -24,7 +23,7 @@ const globSetting = useGlobSetting();
 // 默认数据处理方式
 const transform: AxiosTransform = {
   /**
-   * @description: 请求发送之前调用
+   * @description: 请求发送之前处理
    * @param config axios配置
    * @param options 请求选项
    */
@@ -36,7 +35,7 @@ const transform: AxiosTransform = {
       config.url = `${urlPrefix}${config.url}`;
     }
 
-    // 在拼接请求地址 VITE_GLOB_API_URL
+    // 再拼接请求地址 VITE_GLOB_API_URL 到前面
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`;
     }
@@ -101,23 +100,23 @@ const transform: AxiosTransform = {
   },
 
   /**
-   * @description: 请求之前的错误拦截处理
+   * @description: 请求拦截器错误处理
    */
   requestInterceptorsCatch(error) {
-    throw error;
+    throw Promise.reject(error);
   },
 
   /**
    * @description: 响应拦截处理
    */
-  responseInterceptors: (res: AxiosResponse<any>) => {
+  responseInterceptors: (res) => {
     return res;
   },
 
   /**
-   * @description: 响应错误处理
+   * @description: 响应拦截器错误处理
    */
-  responseInterceptorsCatch: (axiosInstance, error) => {
+  responseInterceptorsCatch: (axiosInstance, error: any) => {
     const { t } = useI18n();
     const errorLogStore = useErrorLogStoreWithOut();
     errorLogStore.addAjaxErrorInfo(error); // 收集错误信息
@@ -129,7 +128,6 @@ const transform: AxiosTransform = {
     const msg: string = response?.data?.error?.message ?? '';
     const err: string = error?.toString?.() ?? '';
     let errMessage = '';
-    debugger;
 
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
@@ -152,7 +150,7 @@ const transform: AxiosTransform = {
       throw new Error(error as unknown as string);
     }
 
-    // 状态码处理
+    // 响应状态码处理
     checkStatus(error?.response?.status, msg, errorMessageMode);
 
     // 添加自动重试机制 保险起见 只针对GET请求
@@ -164,6 +162,67 @@ const transform: AxiosTransform = {
       retryRequest.retry(axiosInstance, error);
     return Promise.reject(error);
   },
+
+  /**
+   * @description: 处理响应数据
+   */
+  transformRequestHook: (res, options) => {
+    const { t } = useI18n();
+
+    const { isTransformResponse, isReturnNativeResponse } = options;
+    // 是否返回原生响应头 比如：需要获取响应头时使用该属性
+    if (isReturnNativeResponse) {
+      return res;
+    }
+    // 不进行任何处理，直接返回
+    // 用于页面代码可能需要直接获取code，data，message这些信息时开启
+    if (!isTransformResponse) {
+      return res.data;
+    }
+
+    const { data } = res;
+    // data不存在，报错
+    if (!data) {
+      throw new Error(t('sys.api.apiRequestFailed'));
+    }
+
+    //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
+    const { code, result, message } = data;
+
+    let msg = '';
+    // 这里逻辑可以根据项目code的定义去处理
+    // 如果不希望中断当前请求，请return数据，否则直接抛出异常即可
+    switch (code) {
+      case ResultEnum.SUCCESS:
+        return result;
+      case ResultEnum.TIMEOUT:
+        msg = t('sys.api.timeoutMessage');
+        const userStore = useUserStoreWithOut();
+        userStore.setToken(undefined);
+        userStore.logout(true);
+        break;
+      default:
+        if (message) {
+          msg = message;
+        }
+    }
+
+    // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
+    // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
+    if (options.errorMessageMode === 'modal') {
+      createErrorModal({ title: t('sys.api.errorTip'), content: msg });
+    } else if (options.errorMessageMode === 'message') {
+      createMessage.error(msg);
+    }
+
+    // 抛出错误
+    throw new Error(msg || t('sys.api.apiRequestFailed'));
+  },
+
+  /**
+   * @description: 响应错误处理
+   */
+  // requestCatchHook: (err, options) => {},
 };
 
 /**
