@@ -16,7 +16,7 @@ const DEFAULT_CONFIG: TreeHelperConfig = {
 const getConfig = (config: Partial<TreeHelperConfig>) => Object.assign({}, DEFAULT_CONFIG, config);
 
 /**
- * @description: 过滤嵌套树结构的节点
+ * @description: 过滤嵌套树形结构的节点
  * @param func 回调方法参数返回false，则会过滤该节点
  */
 export function filter<T = any>(
@@ -40,24 +40,28 @@ export function filter<T = any>(
 }
 
 /**
- * @description: Extract tree specified structure
+ * @description: 处理树形数据
  */
 export function treeMap<T = any>(treeData: T[], opt: { children?: string; conversion: Fn }): T[] {
   return treeData.map((item) => treeMapEach(item, opt));
 }
 
 /**
- * @description: Extract tree specified structure
+ * @description: 处理树节点数据
+ * @param children 默认为字符children，子节点的字段名称，可以设置为其他
+ * @param conversion 由用户传递，用来生成用户想要的数据格式
  */
 export function treeMapEach(
   data: any,
   { children = 'children', conversion }: { children?: string; conversion: Fn },
 ) {
   const haveChildren = Array.isArray(data[children]) && data[children].length > 0;
+
   const conversionData = conversion(data) || {};
   if (haveChildren) {
     return {
       ...conversionData,
+      // 递归处理子节点
       [children]: data[children].map((i: number) =>
         treeMapEach(i, {
           children,

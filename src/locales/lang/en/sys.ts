@@ -22,31 +22,83 @@ export default {
     errMsg504: 'Network timeout!',
     errMsg505: 'The http version does not support the request!',
   },
+  app: {
+    logoutTip: 'Reminder',
+    logoutMessage: 'Confirm to exit the system?',
+    menuLoading: 'Menu loading...',
+  },
+  errorLog: {
+    tableTitle: 'Error log list',
+    tableColumnType: 'Type',
+    tableColumnDate: 'Time',
+    tableColumnFile: 'File',
+    tableColumnMsg: 'Error message',
+    tableColumnStackMsg: 'Stack info',
+
+    tableActionDesc: 'Details',
+
+    modalTitle: 'Error details',
+
+    fireVueError: 'Fire vue error',
+    fireResourceError: 'Fire resource error',
+    fireAjaxError: 'Fire ajax error',
+
+    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.',
+  },
+  exception: {
+    backLogin: 'Back Login',
+    backHome: 'Back Home',
+    subTitle403: "Sorry, you don't have access to this page.",
+    subTitle404: 'Sorry, the page you visited does not exist.',
+    subTitle500: 'Sorry, the server is reporting an error.',
+    noDataTitle: 'No data on the current page.',
+    networkErrorTitle: 'Network Error',
+    networkErrorSubTitle:
+      'Sorry，Your network connection has been disconnected, please check your network!',
+  },
+  lock: {
+    unlock: 'Click to unlock',
+    alert: 'Lock screen password error',
+    backToLogin: 'Back to login',
+    entry: 'Enter the system',
+    placeholder: 'Please enter the lock screen password or user password',
+  },
   login: {
+    backSignIn: 'Back sign in',
+    mobileSignInFormTitle: 'Mobile sign in',
+    qrSignInFormTitle: 'Qr code sign in',
     signInFormTitle: 'Sign in',
     signUpFormTitle: 'Sign up',
     forgetFormTitle: 'Reset password',
-    mobileSignInFormTitle: 'Mobile sign in',
-    qrSignInFormTitle: 'Qr code sign in',
 
-    userName: 'Username',
-    password: 'Password',
-    confirmPassword: 'Confirm Password',
-    rememberMe: 'Remember me',
-    forgetPassword: 'Forget password ?',
+    signInTitle: 'Backstage management system',
+    signInDesc: 'Enter your personal details and get started!',
+    policy: 'I agree to the xxx Privacy Policy',
+    scanSign: `scanning the code to complete the login`,
 
     loginButton: 'Sign in',
     registerButton: 'Sign up',
-    mobile: 'Mobile',
-    backSignIn: 'Back sign in',
-    scanSign: `scanning the code to complete the login`,
-    policy: 'I agree to the xxx Privacy Policy',
+    rememberMe: 'Remember me',
+    forgetPassword: 'Forget Password?',
+    otherSignIn: 'Sign in with',
 
+    // notify
+    loginSuccessTitle: 'Login successful',
+    loginSuccessDesc: 'Welcome back',
+
+    // placeholder
     accountPlaceholder: 'Please input username',
     passwordPlaceholder: 'Please input password',
     smsPlaceholder: 'Please input sms code',
     mobilePlaceholder: 'Please input mobile',
     policyPlaceholder: 'Register after checking',
     diffPwd: 'The two passwords are inconsistent',
+
+    userName: 'Username',
+    password: 'Password',
+    confirmPassword: 'Confirm Password',
+    email: 'Email',
+    smsCode: 'SMS code',
+    mobile: 'Mobile',
   },
 };

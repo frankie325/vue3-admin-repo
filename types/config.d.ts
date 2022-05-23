@@ -41,15 +41,53 @@ export interface GlobEnvConfig {
   VITE_GLOB_UPLOAD_URL?: string;
 }
 
-export interface menuSetting {
-  bgColor: String;
+// 头部设置
+export interface HeaderSetting {
+  bgColor: string;
+  fixed: boolean;
+  show: boolean;
+  theme: ThemeEnum;
+  // Turn on full screen
+  showFullScreen: boolean;
+  // Whether to show the lock screen
+  useLockPage: boolean;
+  // Show document button
+  showDoc: boolean;
+  // Show message center button
+  showNotice: boolean;
+  showSearch: boolean;
 }
+
+// 菜单设置
+export interface MenuSetting {
+  bgColor: string;
+  fixed: boolean;
+  collapsed: boolean;
+  canDrag: boolean;
+  show: boolean;
+  hidden: boolean;
+  split: boolean;
+  menuWidth: number;
+  mode: MenuModeEnum;
+  type: MenuTypeEnum;
+  theme: ThemeEnum;
+  topMenuAlign: 'start' | 'center' | 'end';
+  trigger: TriggerEnum;
+  accordion: boolean;
+  closeMixSidebarOnChange: boolean;
+  collapsedShowTitle: boolean;
+  mixSideTrigger: MixSidebarTriggerEnum;
+  mixSideFixed: boolean;
+}
+
 export interface ProjectConfig {
   // 是否显示配置按钮
   showSettingButton: boolean;
   // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
-
+  // 头部设置
+  headerSetting: HeaderSetting;
+  // 菜单设置
   menuSetting: MenuSetting;
   // 权限缓存类型
   permissionCacheType: CacheTypeEnum;
@@ -57,6 +95,8 @@ export interface ProjectConfig {
   permissionMode: PermissionModeEnum;
   // 是否收集错误信息
   useErrorHandle: boolean;
+  // 是否全屏显示内容，不显示菜单
+  fullContent: false;
 
   // 会话超时处理方案
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;

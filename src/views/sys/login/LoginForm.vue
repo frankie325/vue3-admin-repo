@@ -43,7 +43,7 @@
     </a-row>
 
     <a-form-item class="enter-x">
-      <a-button type="primary" block size="large" @click="handleLogin">{{
+      <a-button type="primary" block size="large" :loading="loading" @click="handleLogin">{{
         t('sys.login.loginButton')
       }}</a-button>
     </a-form-item>
@@ -93,6 +93,7 @@
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '@/hooks/web/useDesign';
   import { useUserStore } from '@/store/modules/user';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const { t } = useI18n();
 
@@ -117,6 +118,9 @@
 
   const userStore = useUserStore();
 
+  const { notification, createErrorModal } = useMessage();
+
+  // 登录
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;
@@ -128,6 +132,22 @@
         username: data.account,
         mode: 'none', //不要默认的错误提示
       });
-    } catch (error) {}
+
+      if (userInfo) {
+        notification.success({
+          message: t('sys.login.loginSuccessTitle'),
+          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+          duration: 3,
+        });
+      }
+    } catch (error) {
+      createErrorModal({
+        title: t('sys.api.errorTip'),
+        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
+        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+      });
+    } finally {
+      loading.value = false;
+    }
   }
 </script>

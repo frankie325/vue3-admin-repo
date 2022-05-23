@@ -6,7 +6,7 @@ declare global {
   declare type Nullable<T> = T | null;
   // 嵌套对象变成可选类型
   declare type DeepPartial<T> = {
-    [P in keyof T]: DeepPartial<T[P]>;
+    [P in keyof T]?: DeepPartial<T[P]>;
   };
 
   // 项目环境变量接口声明

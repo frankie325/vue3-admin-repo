@@ -15,6 +15,7 @@ Object.keys(modules).forEach((key) => {
 
 export const asyncRoutes = [...routeModuleList];
 
+// 根路由
 export const RootRoute: AppRouteRecordRaw = {
   path: '/',
   name: 'Root',

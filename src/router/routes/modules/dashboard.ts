@@ -12,6 +12,7 @@ const dashboard: AppRouteModule = {
     orderNo: 10,
     icon: 'ion:grid-outline',
     title: t('routes.dashboard.dashboard'),
+    // single: true,
   },
   children: [
     {
@@ -21,6 +22,7 @@ const dashboard: AppRouteModule = {
       meta: {
         // affix: true,
         title: t('routes.dashboard.analysis'),
+        hidePathForChildren: true,
       },
       children: [
         {
