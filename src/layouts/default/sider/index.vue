@@ -1,8 +1,13 @@
 <template>
   <a-drawer v-if="getIsMobile" placement="left"> </a-drawer>
+  <MixSider v-else-if="getIsMixSidebar" />
+  <Sider v-else />
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
+
+  import Sider from './LayoutSider.vue';
+  import MixSider from './MixSider.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -10,6 +15,10 @@
 
   export default defineComponent({
     name: 'SiderWrapper',
+    components: {
+      Sider,
+      MixSider,
+    },
     setup() {
       const { prefixCls } = useDesign('layout-sider-wrapper');
       const { getIsMobile } = useAppInject();

@@ -1,8 +1,19 @@
-@import './theme.less';
+// 该文件引入的将会作为全局样式
+
+@import 'theme.less';
+@import 'public.less';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset !important;
+}
+
+:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important;
+}
 
 html {
   font-family: Times, Times, serif;

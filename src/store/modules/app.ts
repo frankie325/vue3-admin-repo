@@ -43,6 +43,11 @@ export const useAppStore = defineStore({
     },
   },
   actions: {
+    // 切换黑暗模式
+    setDarkMode(mode: ThemeEnum): void {
+      this.darkMode = mode;
+      localStorage.setItem(APP_DARK_MODE_KEY_, mode);
+    },
     // 存储项目配置，项目初始化时调用
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config);

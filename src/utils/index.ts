@@ -2,6 +2,8 @@ import type { App, Plugin } from 'vue';
 
 import { isObject } from './is';
 
+export const noop = () => {};
+
 /**
  * @description: 实现对象的简单深拷贝
  */

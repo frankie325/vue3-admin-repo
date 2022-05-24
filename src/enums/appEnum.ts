@@ -1,3 +1,6 @@
+export const SIDE_BAR_MINI_WIDTH = 48;
+export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80;
+
 // 主题
 export enum ThemeEnum {
   DARK = 'dark',
@@ -32,6 +35,7 @@ export enum RouterTransitionEnum {
   FADE_SCALE = 'fade-scale',
 }
 
+// 项目设置按钮的位置
 export enum SettingButtonPositionEnum {
   AUTO = 'auto',
   HEADER = 'header',

@@ -1,5 +1,9 @@
 import { CacheTypeEnum } from '@/enums/cacheEnum';
-import { PermissionModeEnum, SessionTimeoutProcessingEnum } from '@/enums/appEnum';
+import {
+  PermissionModeEnum,
+  SessionTimeoutProcessingEnum,
+  SettingButtonPositionEnum,
+} from '@/enums/appEnum';
 
 // 国际化语言设置接口
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
@@ -83,6 +87,8 @@ export interface MenuSetting {
 export interface ProjectConfig {
   // 是否显示配置按钮
   showSettingButton: boolean;
+  // 项目设置按钮的位置
+  settingButtonPosition: SettingButtonPositionEnum;
   // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
   // 头部设置

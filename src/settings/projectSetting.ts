@@ -13,12 +13,16 @@ import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '
 import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST } from './designSetting';
 
 const setting: ProjectConfig = {
+  // 是否显示项目设置按钮
   showSettingButton: true,
-
+  // 项目设置按钮的位置
+  settingButtonPosition: SettingButtonPositionEnum.AUTO,
+  // 是否显示黑暗模式切换按钮
   showDarkModeToggle: true,
-
+  // 是否显示错误日志按钮
   useErrorHandle: true,
 
+  // 是否全屏显示内容，不显示菜单
   fullContent: false,
 
   headerSetting: {
@@ -28,7 +32,7 @@ const setting: ProjectConfig = {
     fixed: true,
     // 是否显示头部
     show: true,
-    // theme
+    // 头部主题，跟随系统
     theme: ThemeEnum.LIGHT,
     // Whether to enable the lock screen function
     useLockPage: true,
@@ -44,18 +48,18 @@ const setting: ProjectConfig = {
   menuSetting: {
     // 侧边菜单颜色
     bgColor: SIDE_BAR_BG_COLOR_LIST[0],
-    //  Whether to fix the left menu
+    // 是否固定左侧菜单
     fixed: true,
     // 是否折叠菜单
     collapsed: false,
-    // Whether to display the menu name when folding the menu
+    // 折叠菜单时是否显示标题
     collapsedShowTitle: false,
     // Whether it can be dragged
     // Only limited to the opening of the left menu, the mouse has a drag bar on the right side of the menu
     canDrag: false,
     // 是否显示菜单，不会创建DOM
     show: true,
-    // Whether to show dom
+    // 是否隐藏菜单，隐藏DOM
     hidden: false,
     // 菜单宽度
     menuWidth: 210,
@@ -69,7 +73,7 @@ const setting: ProjectConfig = {
     split: false,
     // Top menu layout
     topMenuAlign: 'center',
-    // Fold trigger position
+    // 菜单折叠按钮的位置
     trigger: TriggerEnum.HEADER,
     // Turn on accordion mode, only show a menu
     accordion: true,
@@ -77,7 +81,7 @@ const setting: ProjectConfig = {
     closeMixSidebarOnChange: false,
     // Module opening method ‘click’ |'hover'
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,
-    // Fixed expanded menu
+    // 是否固定展开菜单
     mixSideFixed: false,
   },
 
