@@ -3,7 +3,7 @@
 @breadcrumb-prefix-cls: ~'@{namespace}-layout-breadcrumb';
 @logo-prefix-cls: ~'@{namespace}-app-logo';
 
-.@{header-prefix-cls}{
+.@{header-prefix-cls} {
   display: flex;
   height: @header-height;
   padding: 0;
@@ -13,8 +13,8 @@
   background-color: @white;
   align-items: center;
   justify-content: space-between;
-  
-  &-left{
+
+  &-left {
     display: flex;
     height: 100%;
     align-items: center;
@@ -31,7 +31,7 @@
     display: flex;
     min-width: 180px;
 
-    &__item{
+    &__item {
       display: flex !important;
       height: @header-height;
       padding: 0 2px;
@@ -41,7 +41,7 @@
     }
   }
 
-  &--light{
+  &--light {
     background-color: @white !important;
     border-bottom: 1px solid @header-light-bottom-border-color;
     border-left: 1px solid @header-light-bottom-border-color;
@@ -67,11 +67,10 @@
     }
   }
 
-  &--dark{
+  &--dark {
     background-color: @header-dark-bg-color !important;
     // border-bottom: 1px solid @border-color-base;
     border-left: 1px solid @border-color-base;
-
 
     .@{header-prefix-cls}-action {
       &__item {
@@ -93,4 +92,3 @@
     }
   }
 }
-
