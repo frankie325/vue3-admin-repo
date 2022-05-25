@@ -46,6 +46,9 @@ export function useMenuSetting() {
   // 是否分割菜单
   const getSplit = computed(() => appStore.getMenuSetting.split);
 
+  // 获取菜单背景色
+  const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor);
+
   // 菜单类型是否为左侧菜单
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
@@ -100,6 +103,7 @@ export function useMenuSetting() {
     getMenuWidth,
     getMenuType,
     getSplit,
+    getMenuBgColor,
     getIsSidebarType,
     getIsTopMenu,
     getShowHeaderTrigger,

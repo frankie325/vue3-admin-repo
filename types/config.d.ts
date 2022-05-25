@@ -51,13 +51,9 @@ export interface HeaderSetting {
   fixed: boolean;
   show: boolean;
   theme: ThemeEnum;
-  // Turn on full screen
   showFullScreen: boolean;
-  // Whether to show the lock screen
   useLockPage: boolean;
-  // Show document button
   showDoc: boolean;
-  // Show message center button
   showNotice: boolean;
   showSearch: boolean;
 }
@@ -91,6 +87,8 @@ export interface ProjectConfig {
   settingButtonPosition: SettingButtonPositionEnum;
   // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
+  // 系统主题颜色
+  themeColor: string;
   // 头部设置
   headerSetting: HeaderSetting;
   // 菜单设置

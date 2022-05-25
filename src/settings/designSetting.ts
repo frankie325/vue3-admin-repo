@@ -8,7 +8,7 @@ export const darkMode = ThemeEnum.LIGHT;
 
 // 项目主题预设颜色
 export const APP_PRESET_COLOR_LIST: string[] = [
-  '#0960bd',
+  '#1890ff', //同ant-design-vue
   '#0084f4',
   '#009688',
   '#536dfe',

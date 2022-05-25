@@ -20,7 +20,7 @@ export function getAuthCache<T>(key: BasicKeys) {
 }
 
 /**
- * @description: 将用户权限缓存到本地
+ * @description: 将用户权限进行缓存，并立即存储到本地
  */
 export function setAuthCache(key: BasicKeys, value: any) {
   const fn = isLocal ? Persistent.setLocal : Persistent.setSession;

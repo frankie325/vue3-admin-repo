@@ -41,6 +41,7 @@ module.exports = {
     'vue/attribute-hyphenation': 'off', // 关闭强制将驼峰属性转为连字符的功能
     'vue/require-default-prop': 'warn', // 自定义事件没在emits选项中声明，则警告
     'vue/multi-word-component-names': 'off', // 关闭组件名必须是多个单词
+    'vue/require-default-prop': 'off', // 关闭props没有默认值的警告
 
     // @typescript-eslint插件的rules配置：https://typescript-eslint.io/rules/
     '@typescript-eslint/no-explicit-any': 'off', // 关闭any类型的警告

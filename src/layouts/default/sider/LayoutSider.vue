@@ -1,5 +1,6 @@
 <template>
   <div v-if="getMenuFixed && !getIsMobile" :style="getHiddenDomStyle"> </div>
+  <a-layout-sider>sider</a-layout-sider>
 </template>
 <script lang="ts">
   import { computed, defineComponent, ref, unref, CSSProperties, h } from 'vue';

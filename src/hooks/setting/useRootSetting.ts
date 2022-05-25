@@ -15,6 +15,8 @@ export function useRootSetting() {
   const getShowDarkModeToggle = computed(() => appStore.getProjectConfig.showDarkModeToggle);
   // 获取当前黑暗模式
   const getDarkMode = computed(() => appStore.getDarkMode);
+  // 获取系统主题颜色
+  const getThemeColor = computed(() => appStore.getProjectConfig.themeColor);
 
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
@@ -26,7 +28,7 @@ export function useRootSetting() {
     getUseErrorHandle,
     getShowDarkModeToggle,
     getDarkMode,
-
+    getThemeColor,
     setDarkMode,
   };
 }

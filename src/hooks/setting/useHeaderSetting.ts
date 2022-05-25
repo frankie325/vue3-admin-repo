@@ -31,14 +31,17 @@ export function useHeaderSetting() {
 
   const getShowMixHeaderRef = computed(() => !unref(getIsSidebarType) && unref(getShowHeader));
 
-  // 头部主题，跟随系统
+  // 头部主题
   const getHeaderTheme = computed(() => appStore.getHeaderSetting.theme);
   // 是否显示头部
   const getShowHeader = computed(() => appStore.getHeaderSetting.show);
+  // 获取头部背景颜色
+  const getHeaderBgColor = computed(() => appStore.getHeaderSetting.bgColor);
 
   return {
     getShowFullHeaderRef,
     getHeaderTheme,
     getShowHeader,
+    getHeaderBgColor,
   };
 }

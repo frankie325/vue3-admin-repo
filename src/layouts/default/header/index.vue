@@ -45,7 +45,7 @@
           {
             [`${prefixCls}--fix`]: props.fixed,
             [`${prefixCls}--mobile`]: unref(getIsMobile),
-            [`${prefixCls}--${theme}`]: theme,
+            [`${prefixCls}--${theme}`]: theme, //根据头部主题切换头部背景色
           },
         ];
       });

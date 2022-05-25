@@ -11,6 +11,7 @@ import {
 import { MenuTypeEnum, MenuModeEnum, TriggerEnum, MixSidebarTriggerEnum } from '@/enums/menuEnum';
 
 import { SIDE_BAR_BG_COLOR_LIST, HEADER_PRESET_BG_COLOR_LIST } from './designSetting';
+import { primaryColor } from '../../build/config/themeConfig';
 
 const setting: ProjectConfig = {
   // 是否显示项目设置按钮
@@ -21,18 +22,18 @@ const setting: ProjectConfig = {
   showDarkModeToggle: true,
   // 是否显示错误日志按钮
   useErrorHandle: true,
-
   // 是否全屏显示内容，不显示菜单
   fullContent: false,
-
+  // 系统主题颜色
+  themeColor: primaryColor,
   headerSetting: {
-    // header bg color
+    // 头部背景颜色
     bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
     // Fixed at the top
     fixed: true,
     // 是否显示头部
     show: true,
-    // 头部主题，跟随系统
+    // 头部主题
     theme: ThemeEnum.LIGHT,
     // Whether to enable the lock screen function
     useLockPage: true,

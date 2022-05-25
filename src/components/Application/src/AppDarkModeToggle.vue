@@ -13,9 +13,9 @@
   import { useDesign } from '@/hooks/web/useDesign';
 
   import { updateDarkTheme } from '@/logics/theme/dark';
+  import { updateHeaderBgColor } from '@/logics/theme/updateBackground';
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
   import { ThemeEnum } from '@/enums/appEnum';
-
   const { prefixCls } = useDesign('dark-switch');
   const { getDarkMode, setDarkMode, getShowDarkModeToggle } = useRootSetting();
 
@@ -32,6 +32,7 @@
     const darkMode = mode === ThemeEnum.DARK ? ThemeEnum.DARK : ThemeEnum.LIGHT;
     setDarkMode(darkMode);
     updateDarkTheme(darkMode);
+    updateHeaderBgColor();
   }
 </script>
 

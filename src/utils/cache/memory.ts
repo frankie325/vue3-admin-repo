@@ -11,6 +11,7 @@ const NOT_ALIVE = 0;
  * @description: 设置项目中的各种缓存，都在cache对象中
  * 为什么不直接存储在本地？
  * cache相当于一个暂存区，先将项目的各种缓存先暂存到cache对象中，最后再将所有缓存一次性存入到本地
+ * 可以防止频繁操作本地存储
  */
 export class Memory<T = any, V = any> {
   // 缓存的值类型为 Cache<V>
