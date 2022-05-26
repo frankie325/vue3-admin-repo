@@ -3,7 +3,7 @@ import type { ProjectConfig, MenuSetting } from '#/config';
 import { defineStore } from 'pinia';
 import { store } from '@/store';
 
-import { HeaderSetting } from '#/config';
+import { HeaderSetting, MultiTabsSetting } from '#/config';
 import { ThemeEnum } from '@/enums/appEnum';
 import { Persistent } from '@/utils/cache/persistent';
 import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '@/enums/cacheEnum';
@@ -40,6 +40,10 @@ export const useAppStore = defineStore({
     // 获取项目配置
     getProjectConfig(): ProjectConfig {
       return this.projectConfig || ({} as ProjectConfig);
+    },
+    // 获取标签页配置
+    getMultiTabsSetting(): MultiTabsSetting {
+      return this.getProjectConfig.multiTabsSetting;
     },
   },
   actions: {

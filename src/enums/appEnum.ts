@@ -1,5 +1,5 @@
-export const SIDE_BAR_MINI_WIDTH = 48;
-export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80;
+export const SIDE_BAR_MINI_WIDTH = 48; // 折叠菜单时的宽度
+export const SIDE_BAR_SHOW_TIT_MINI_WIDTH = 80; // 左侧混合模式菜单的宽度（折叠时显示菜单标题的宽度）
 
 // 主题
 export enum ThemeEnum {

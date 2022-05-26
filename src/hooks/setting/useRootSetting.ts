@@ -17,6 +17,12 @@ export function useRootSetting() {
   const getDarkMode = computed(() => appStore.getDarkMode);
   // 获取系统主题颜色
   const getThemeColor = computed(() => appStore.getProjectConfig.themeColor);
+  // 是否显示logo
+  const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
+  // 是否显示面包屑
+  const getShowBreadCrumb = computed(() => appStore.getProjectConfig.showBreadCrumb);
+  // 是否显示面包屑图标
+  const getShowBreadCrumbIcon = computed(() => appStore.getProjectConfig.showBreadCrumbIcon);
 
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
@@ -29,6 +35,9 @@ export function useRootSetting() {
     getShowDarkModeToggle,
     getDarkMode,
     getThemeColor,
+    getShowLogo,
+    getShowBreadCrumb,
+    getShowBreadCrumbIcon,
     setDarkMode,
   };
 }

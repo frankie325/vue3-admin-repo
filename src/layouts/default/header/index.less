@@ -14,6 +14,27 @@
   align-items: center;
   justify-content: space-between;
 
+  &--fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: @layout-header-fixed-z-index;
+    width: 100%;
+  }
+  // 头部的logo样式
+  &-logo {
+    height: @header-height;
+    min-width: 192px;
+    padding: 0 10px;
+    font-size: 14px;
+
+    img {
+      width: @logo-width;
+      height: @logo-width;
+      margin-right: 2px;
+    }
+  }
+
   &-left {
     display: flex;
     height: 100%;

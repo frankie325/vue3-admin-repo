@@ -58,7 +58,7 @@ export enum HandlerEnum {
   OPEN_ROUTE_TRANSITION,
 }
 
-// 菜单模式
+// 菜单类型和菜单方向组成四种菜单模式
 export const menuTypeList = [
   {
     title: t('layout.setting.menuTypeSidebar'),

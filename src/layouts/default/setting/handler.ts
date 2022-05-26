@@ -29,7 +29,19 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
 
   switch (event) {
     case HandlerEnum.CHANGE_LAYOUT:
-      return {};
+      const { mode, type, split } = value;
+      const splitOpt = split === undefined ? { split } : {};
+
+      return {
+        menuSetting: {
+          mode,
+          type,
+          collapsed: false,
+          show: true,
+          hidden: false,
+          ...splitOpt,
+        },
+      };
     // case HandlerEnum.CHANGE_THEME:
     //   return {};
     case HandlerEnum.CHANGE_THEME_COLOR:

@@ -1,4 +1,5 @@
 <template>
+  <!-- 移动端时菜单放到抽屉中 -->
   <a-drawer v-if="getIsMobile" placement="left"> </a-drawer>
   <MixSider v-else-if="getIsMixSidebar" />
   <LayoutSider v-else />

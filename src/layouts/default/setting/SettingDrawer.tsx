@@ -13,6 +13,7 @@ import {
   SIDE_BAR_BG_COLOR_LIST,
   APP_PRESET_COLOR_LIST,
 } from '@/settings/designSetting';
+import { baseHandler } from './handler';
 
 export default defineComponent({
   name: 'SettingDrawer',
@@ -33,12 +34,30 @@ export default defineComponent({
     const { getShowDarkModeToggle, getThemeColor } = useRootSetting();
     const { getHeaderBgColor } = useHeaderSetting();
 
-    const { getMenuType, getMenuBgColor, getShowSidebar, getIsMixSidebar, getShowMenu } =
-      useMenuSetting();
+    const {
+      getMenuType,
+      getMenuBgColor,
+      getShowSidebar,
+      getIsMixSidebar,
+      getShowMenu,
+      getIsHorizontal,
+    } = useMenuSetting();
 
     function renderSidebar() {
-      //@ts-ignore
-      return <TypePicker menuTypeList={menuTypeList} handle={() => {}} def={unref(getMenuType)} />;
+      return (
+        <TypePicker
+          //@ts-ignore
+          menuTypeList={menuTypeList}
+          handler={(item: typeof menuTypeList[0]) => {
+            baseHandler(HandlerEnum.CHANGE_LAYOUT, {
+              mode: item.mode,
+              type: item.type,
+              split: unref(getIsHorizontal) ? false : undefined,
+            });
+          }}
+          def={unref(getMenuType)}
+        />
+      );
     }
 
     function renderMainTheme() {

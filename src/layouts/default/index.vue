@@ -1,11 +1,12 @@
 <template>
   <a-layout :class="prefixCls">
-    <LayoutFeatures />
-    <LayoutHeader fixed v-if="!getShowFullHeaderRef" />
+    <!-- <LayoutFeatures /> -->
+    <LayoutHeader fixed v-if="getShowFullHeaderRef" />
     <a-layout :class="[layoutClass]">
       <LayoutSideBar v-if="getShowSidebar || getIsMobile" />
-      <a-layout :class="`${prefixCls}-main`"> </a-layout>
-      <router-view></router-view>
+      <a-layout :class="`${prefixCls}-main`">
+        <LayoutMultipleHeader />
+      </a-layout>
     </a-layout>
   </a-layout>
 </template>
@@ -15,6 +16,7 @@
 
   import LayoutHeader from './header/index.vue';
   import LayoutSideBar from './sider/index.vue';
+  import LayoutMultipleHeader from './header/MultipleHeader.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -25,9 +27,10 @@
   export default defineComponent({
     name: 'LayoutContent',
     components: {
-      LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
+      // LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
       LayoutHeader,
       LayoutSideBar,
+      LayoutMultipleHeader,
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');
