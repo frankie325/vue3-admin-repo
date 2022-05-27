@@ -59,3 +59,30 @@ export function removeClass(el: Element, cls: string) {
     el.className = curClass;
   }
 }
+
+/**
+ * @description: 添加事件监听
+ */
+
+export function on(
+  element: Element | HTMLElement | Document | Window,
+  event: string,
+  handler: EventListenerOrEventListenerObject,
+): void {
+  if (element && event && handler) {
+    element.addEventListener(event, handler, false);
+  }
+}
+
+/**
+ * @description: 移除事件监听
+ */
+export function off(
+  element: Element | HTMLElement | Document | Window,
+  event: string,
+  handler: Fn,
+): void {
+  if (element && event && handler) {
+    element.removeEventListener(event, handler, false);
+  }
+}

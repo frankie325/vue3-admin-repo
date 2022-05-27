@@ -13,7 +13,7 @@
   import { useDesign } from '@/hooks/web/useDesign';
 
   import { updateDarkTheme } from '@/logics/theme/dark';
-  import { updateHeaderBgColor } from '@/logics/theme/updateBackground';
+  import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
   import { ThemeEnum } from '@/enums/appEnum';
   const { prefixCls } = useDesign('dark-switch');
@@ -33,6 +33,7 @@
     setDarkMode(darkMode);
     updateDarkTheme(darkMode);
     updateHeaderBgColor();
+    updateSidebarBgColor();
   }
 </script>
 

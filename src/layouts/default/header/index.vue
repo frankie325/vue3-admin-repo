@@ -67,7 +67,7 @@
           prefixCls,
           {
             [`${prefixCls}--fixed`]: props.fixed,
-            [`${prefixCls}--mobile`]: unref(getIsMobile),
+            [`${prefixCls}--mobile`]: unref(getIsMobile), // 屏幕断点小于lg应用
             [`${prefixCls}--${theme}`]: theme, //根据头部主题切换头部背景色
           },
         ];

@@ -74,7 +74,7 @@ const setting: ProjectConfig = {
     mode: MenuModeEnum.INLINE,
     // 菜单类型
     type: MenuTypeEnum.SIDEBAR,
-    // Menu theme
+    // 菜单主题
     theme: ThemeEnum.DARK,
     // Split menu
     split: false,

@@ -32,6 +32,7 @@ export enum MenuTypeEnum {
   TOP_MENU = 'top-menu',
 }
 
+// 菜单分割类型
 export enum MenuSplitTyeEnum {
   NONE,
   TOP,

@@ -10,7 +10,7 @@ import { ThemeEnum } from '@/enums/appEnum';
 import { updateDarkTheme } from './theme/dark';
 import { primaryColor } from '../../build/config/themeConfig';
 import { changeTheme } from '@/logics/theme';
-import { updateHeaderBgColor } from './theme/updateBackground';
+import { updateHeaderBgColor, updateSidebarBgColor } from './theme/updateBackground';
 /**
  * @description:  初始化pinia仓库状态
  */
@@ -47,8 +47,10 @@ export function initAppConfigStore() {
   // 初始化头部背景颜色和菜单背景颜色
   if (darkMode === ThemeEnum.DARK) {
     updateHeaderBgColor();
+    updateSidebarBgColor();
   } else {
     headerBgColor && updateHeaderBgColor(headerBgColor);
+    bgColor && updateSidebarBgColor(bgColor);
   }
 
   // 初始化国际化语言仓库状态

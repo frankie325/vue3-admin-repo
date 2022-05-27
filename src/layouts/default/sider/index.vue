@@ -1,6 +1,16 @@
 <template>
-  <!-- 移动端时菜单放到抽屉中 -->
-  <a-drawer v-if="getIsMobile" placement="left"> </a-drawer>
+  <!-- 当屏幕断点小于lg时，显示抽屉中的菜单 -->
+  <a-drawer
+    v-if="getIsMobile"
+    placement="left"
+    :class="prefixCls"
+    :width="getMenuWidth"
+    :getContainer="null"
+    :visible="!getCollapsed"
+    @close="handleClose"
+  >
+    <LayoutSider />
+  </a-drawer>
   <MixSider v-else-if="getIsMixSidebar" />
   <LayoutSider v-else />
 </template>
@@ -25,7 +35,7 @@
       const { getIsMobile } = useAppInject();
       const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
 
-      //
+      // 关闭抽屉
       function handleClose() {
         setMenuSetting({
           collapsed: true,
@@ -43,3 +53,18 @@
     },
   });
 </script>
+
+<style lang="less">
+  @prefix-cls: ~'@{namespace}-layout-sider-wrapper';
+
+  .@{prefix-cls} {
+    .ant-drawer-body {
+      height: 100vh;
+      padding: 0;
+    }
+
+    .ant-drawer-header-no-title {
+      display: none;
+    }
+  }
+</style>

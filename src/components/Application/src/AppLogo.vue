@@ -1,5 +1,5 @@
 <template>
-  <div class="anticon" :class="getAppLogoClass">
+  <div :class="getAppLogoClass">
     <img src="../../../assets/logo.png" alt="" srcset="" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       {{ title }}</div
@@ -40,7 +40,7 @@
   const getTitleClass = computed(() => [
     `${prefixCls}__title`,
     {
-      'xs:opacity-0': !props.alwaysShowTitle,
+      // 'xs:opacity-0': !props.alwaysShowTitle,
     },
   ]);
 </script>

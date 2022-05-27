@@ -13,7 +13,7 @@ export function useHeaderSetting() {
   const { getFullContent } = useFullContent();
   const appStore = useAppStore();
 
-  // 当为顶部菜单或顶部菜单混合模式时，展示完整的头部
+  // 顶部菜单混合模式时，展示完整的头部
   const getShowFullHeaderRef = computed(() => {
     return (
       !unref(getFullContent) &&

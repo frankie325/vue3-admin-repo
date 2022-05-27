@@ -14,6 +14,31 @@
   align-items: center;
   justify-content: space-between;
 
+  // 屏幕断点小于lg时的样式
+  &--mobile {
+    .@{breadcrumb-prefix-cls},
+    .error-action,
+    .notify-item,
+    .fullscreen-item {
+      display: none;
+    }
+
+    .@{logo-prefix-cls} {
+      min-width: unset;
+      padding-right: 0;
+
+      &__title {
+        display: none;
+      }
+    }
+    .@{header-trigger-prefix-cls} {
+      padding: 0 4px 0 8px !important;
+    }
+    .@{header-prefix-cls}-action {
+      padding-right: 4px;
+    }
+  }
+
   &--fixed {
     position: fixed;
     top: 0;
@@ -39,6 +64,35 @@
     display: flex;
     height: 100%;
     align-items: center;
+
+    // 头部折叠按钮样式
+    .@{header-trigger-prefix-cls} {
+      display: flex;
+      height: 100%;
+      padding: 1px 10px 0;
+      cursor: pointer;
+      align-items: center;
+
+      .anticon {
+        font-size: 16px;
+      }
+
+      &.light {
+        &:hover {
+          background-color: @header-light-bg-hover-color;
+        }
+
+        svg {
+          fill: #000;
+        }
+      }
+
+      &.dark {
+        &:hover {
+          background-color: @header-dark-bg-hover-color;
+        }
+      }
+    }
   }
 
   &-menu {

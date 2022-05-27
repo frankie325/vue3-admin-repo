@@ -1,6 +1,7 @@
 <template>
   <a-layout :class="prefixCls">
     <!-- <LayoutFeatures /> -->
+    <!-- 顶部混合模式 展示外层的header -->
     <LayoutHeader fixed v-if="getShowFullHeaderRef" />
     <a-layout :class="[layoutClass]">
       <LayoutSideBar v-if="getShowSidebar || getIsMobile" />

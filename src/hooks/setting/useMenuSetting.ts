@@ -14,7 +14,7 @@ export function useMenuSetting() {
 
   const appStore = useAppStore();
 
-  // 是否显示侧边菜单，不分割菜单
+  // 是否显示侧边菜单
   const getShowSidebar = computed(() => {
     return (
       unref(getSplit) ||
@@ -31,7 +31,7 @@ export function useMenuSetting() {
   // 左侧菜单是否使用fixed布局
   const getMenuFixed = computed(() => appStore.getMenuSetting.fixed);
 
-  // 菜单宽度
+  // 菜单的默认宽度
   const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth);
 
   // 菜单折叠按钮的位置
@@ -45,6 +45,9 @@ export function useMenuSetting() {
 
   // 菜单类型
   const getMenuType = computed(() => appStore.getMenuSetting.type);
+
+  // 菜单主题
+  const getMenuTheme = computed(() => appStore.getMenuSetting.theme);
 
   // 是否分割菜单，只在顶部菜单模式有效
   const getSplit = computed(() => appStore.getMenuSetting.split);
@@ -94,7 +97,7 @@ export function useMenuSetting() {
     return unref(getMenuMode) === MenuModeEnum.INLINE && unref(getMenuType) === MenuTypeEnum.MIX;
   });
 
-  // 菜单宽度
+  // 菜单占位div的宽度
   // 非左侧菜单混合模式时：只需判断是否折叠获取宽度
   // 左侧菜单混合模式时
   const getRealWidth = computed(() => {
@@ -135,6 +138,13 @@ export function useMenuSetting() {
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     appStore.setProjectConfig({ menuSetting });
   }
+
+  // 设置projectConfig.menuSetting.collapsed
+  function toggleCollapsed() {
+    setMenuSetting({
+      collapsed: !unref(getCollapsed),
+    });
+  }
   return {
     getCollapsed,
     getMenuMode,
@@ -143,6 +153,7 @@ export function useMenuSetting() {
     getMenuHidden,
     getMenuWidth,
     getMenuType,
+    getMenuTheme,
     getSplit,
     getMenuBgColor,
     getIsSidebarType,
@@ -157,5 +168,6 @@ export function useMenuSetting() {
     getCalcContentWidth,
     getCollapsedShowTitle,
     setMenuSetting,
+    toggleCollapsed,
   };
 }

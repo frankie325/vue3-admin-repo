@@ -6,7 +6,7 @@ import { HandlerEnum } from './enum';
 
 import { updateDarkTheme } from '@/logics/theme/dark';
 import { changeTheme } from '@/logics/theme';
-import { updateHeaderBgColor } from '@/logics/theme/updateBackground';
+import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
@@ -54,6 +54,10 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.HEADER_THEME:
       updateHeaderBgColor(value);
       return { headerSetting: { bgColor: value } };
+
+    case HandlerEnum.MENU_THEME:
+      updateSidebarBgColor(value);
+      return { menuSetting: { bgColor: value } };
     default:
       return {};
   }
