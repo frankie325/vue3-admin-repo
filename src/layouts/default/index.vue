@@ -7,8 +7,10 @@
       <LayoutSideBar v-if="getShowSidebar || getIsMobile" />
       <a-layout :class="`${prefixCls}-main`">
         <LayoutMultipleHeader />
+        <router-view></router-view>
       </a-layout>
     </a-layout>
+    <!-- <LayoutContent /> -->
   </a-layout>
 </template>
 
@@ -18,6 +20,7 @@
   import LayoutHeader from './header/index.vue';
   import LayoutSideBar from './sider/index.vue';
   import LayoutMultipleHeader from './header/MultipleHeader.vue';
+  import LayoutContent from './content/index.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -32,6 +35,7 @@
       LayoutHeader,
       LayoutSideBar,
       LayoutMultipleHeader,
+      // LayoutContent,
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');

@@ -60,7 +60,7 @@ const setting: ProjectConfig = {
     // 是否折叠菜单
     collapsed: false,
     // 折叠菜单时是否显示标题
-    collapsedShowTitle: false,
+    collapsedShowTitle: true,
     // Whether it can be dragged
     // Only limited to the opening of the left menu, the mouse has a drag bar on the right side of the menu
     canDrag: false,
@@ -76,14 +76,14 @@ const setting: ProjectConfig = {
     type: MenuTypeEnum.SIDEBAR,
     // 菜单主题
     theme: ThemeEnum.DARK,
-    // Split menu
+    // 是否分割菜单
     split: false,
     // Top menu layout
     topMenuAlign: 'center',
     // 菜单折叠按钮的位置
     trigger: TriggerEnum.HEADER,
-    // Turn on accordion mode, only show a menu
-    accordion: true,
+    // 是否为手风琴模式，只打开一个菜单
+    accordion: false,
     // Switch page to close menu
     closeMixSidebarOnChange: false,
     // Module opening method ‘click’ |'hover'

@@ -66,6 +66,12 @@ export function isArray(val: any): val is Array<any> {
 }
 
 /**
+ * @description: 是否为boolean值
+ */
+export function isBoolean(val: unknown): val is boolean {
+  return is(val, 'Boolean');
+}
+/**
  * @description: 是否为url
  */
 export function isUrl(path: string): boolean {

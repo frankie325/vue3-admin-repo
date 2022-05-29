@@ -9,6 +9,8 @@ declare global {
     [P in keyof T]?: DeepPartial<T[P]>;
   };
 
+  declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+
   // 项目环境变量接口声明
   declare interface ViteEnv {
     VITE_PORT: number;

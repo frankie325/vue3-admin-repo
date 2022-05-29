@@ -11,7 +11,7 @@
     :theme="getMenuTheme"
     @breakpoint="onBreakpointChange"
   >
-    <LayoutMenu />
+    <LayoutMenu :theme="getMenuTheme" :menuMode="getMode" :splitType="getSplitType" />
   </a-layout-sider>
 </template>
 <script lang="ts">
@@ -24,6 +24,7 @@
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
 
   import { useSiderEvent } from './useLayoutSider';
+  import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum';
 
   export default defineComponent({
     name: 'LayoutSideBar',
@@ -62,6 +63,15 @@
         };
       });
 
+      // 如果分割菜单，则菜单模式为INLINE
+      const getMode = computed(() => {
+        return unref(getSplit) ? MenuModeEnum.INLINE : null;
+      });
+
+      // 如果分割菜单，则分割菜单类型为LEFT
+      const getSplitType = computed(() => {
+        return unref(getSplit) ? MenuSplitTyeEnum.LEFT : MenuSplitTyeEnum.NONE;
+      });
       //分割菜单且隐藏时，则占位div也隐藏
       const showClassSideBarRef = computed(() => {
         return unref(getSplit) ? !unref(getMenuHidden) : true;
@@ -87,6 +97,8 @@
         showClassSideBarRef,
         getCollapsed,
         getCollapsedWidth,
+        getSplitType,
+        getMode,
         onBreakpointChange,
       };
     },

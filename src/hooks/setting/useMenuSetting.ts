@@ -58,6 +58,9 @@ export function useMenuSetting() {
   // 菜单类型是否为左侧菜单
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
+  // 是否为手风琴模式，只打开一个菜单
+  const getAccordion = computed(() => appStore.getMenuSetting.accordion);
+
   // 是否固定展开菜单
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
 
@@ -167,6 +170,7 @@ export function useMenuSetting() {
     getMiniWidthNumber,
     getCalcContentWidth,
     getCollapsedShowTitle,
+    getAccordion,
     setMenuSetting,
     toggleCollapsed,
   };

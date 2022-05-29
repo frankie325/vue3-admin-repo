@@ -4,36 +4,53 @@
 
   import { AppLogo } from '@/components/Application';
   import { ScrollContainer } from '@/components/Container';
+  import { SimpleMenu } from '@/components/SimpleMenu';
+  import { BasicMenu } from '@/components/Menu';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useGo } from '@/hooks/web/usePage';
   import { propTypes } from '@/utils/propTypes';
   import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum';
+  import { isUrl } from '@/utils/is';
+  import { openWindow } from '@/utils';
+  import { useSplitMenu } from './useLayoutMenu';
 
   export default defineComponent({
     name: 'LayoutMenu',
     props: {
       theme: propTypes.oneOf(['light', 'dark']),
+      // 分割菜单类型
       splitType: {
         type: Number as PropType<MenuSplitTyeEnum>,
         default: MenuSplitTyeEnum.NONE,
       },
       isHorizontal: propTypes.bool,
-      // menu Mode
+      // 菜单模式
       menuMode: {
         type: [String] as PropType<Nullable<MenuModeEnum>>,
         default: '',
       },
     },
     setup(props) {
+      const go = useGo();
+
       const { getShowLogo } = useRootSetting();
       const { prefixCls } = useDesign('layout-menu');
 
       const { getIsMobile } = useAppInject();
 
-      const { getCollapsed, getIsSidebarType, getMenuTheme, getIsHorizontal } = useMenuSetting();
+      const {
+        getCollapsed,
+        getAccordion,
+        getCollapsedShowTitle,
+        getIsSidebarType,
+        getMenuTheme,
+        getIsHorizontal,
+        getSplit,
+      } = useMenuSetting();
 
       // 只有左侧菜单模式需要展示菜单内的logo
       const getIsShowLogo = computed(() => unref(getShowLogo) && unref(getIsSidebarType));
@@ -79,7 +96,50 @@
         };
       });
 
-      function renderMenu() {}
+      /**
+       * before click menu
+       * @param menu
+       */
+      async function beforeMenuClickFn(path: string) {
+        if (!isUrl(path)) {
+          return true;
+        }
+        openWindow(path);
+        return false;
+      }
+      /**
+       * @description 路由跳转
+       */
+      function handleMenuClick(path: string) {
+        go(path);
+      }
+
+      const { menusRef } = useSplitMenu(toRef(props, 'splitType'));
+
+      const getCommonProps = computed(() => {
+        const menus = unref(menusRef);
+        return {
+          menus,
+          beforeClickFn: beforeMenuClickFn,
+          items: menus, //菜单
+          theme: unref(getComputedMenuTheme), //菜单主题
+          accordion: unref(getAccordion), // 是否开启手风琴
+          collapse: unref(getCollapsed), // 是否折叠
+          collapsedShowTitle: unref(getCollapsedShowTitle), // 折叠是否显示标题
+          onMenuClick: handleMenuClick,
+        };
+      });
+
+      function renderMenu() {
+        const { menus, ...menuProps } = unref(getCommonProps);
+        console.log(menus);
+        if (!menus || !menus.length) return null;
+        return !props.isHorizontal ? (
+          <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
+        ) : (
+          <BasicMenu />
+        );
+      }
 
       return () => {
         return (

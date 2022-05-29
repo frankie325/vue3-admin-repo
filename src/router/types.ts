@@ -20,6 +20,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta' | 'childr
 
 export type AppRouteModule = AppRouteRecordRaw;
 
+// 菜单标签类型
 export interface MenuTag {
   type?: 'primary' | 'error' | 'warn' | 'success';
   content?: string;
@@ -45,9 +46,9 @@ export interface Menu {
   roles?: RoleEnum[];
 
   meta?: Partial<RouteMeta>;
-
+  // 菜单标签
   tag?: MenuTag;
-
+  // 是否隐藏菜单
   hideMenu?: boolean;
 }
 

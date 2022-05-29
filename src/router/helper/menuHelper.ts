@@ -63,3 +63,23 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
   joinParentPath(list);
   return cloneDeep(list);
 }
+
+/**
+ * @description: 返回从父级菜单节点大到自身节点的数组path
+ */
+export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
+  const menuList = findPath(treeData, (n) => n.path === path) as Menu[];
+  return (menuList || []).map((item) => item.path);
+}
+
+/**
+ * @description: 处理静态菜单
+ */
+export function transformMenuModule(menuModule: MenuModule): Menu {
+  const { menu } = menuModule;
+
+  const menuList = [menu];
+
+  joinParentPath(menuList);
+  return menuList[0];
+}

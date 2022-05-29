@@ -1,4 +1,5 @@
 import type { App, Plugin } from 'vue';
+import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 
 import { isObject } from './is';
 
@@ -48,4 +49,38 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
   }
   parameters = parameters.replace(/&$/, '');
   return /\?$/.test(baseUrl) ? baseUrl + parameters : baseUrl.replace(/\/?$/, '?') + parameters;
+}
+
+/**
+ * @description: 打开窗口方法
+ */
+export function openWindow(
+  url: string,
+  opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean },
+) {
+  const { target = '__blank', noopener = true, noreferrer = true } = opt || {};
+  const feature: string[] = [];
+
+  noopener && feature.push('noopener=yes');
+  noreferrer && feature.push('noreferrer=yes');
+
+  window.open(url, target, feature.join(','));
+}
+
+/**
+ * @description:
+ */
+export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
+  if (!route) return route;
+  const { matched, ...opt } = route;
+  return {
+    ...opt,
+    matched: (matched
+      ? matched.map((item) => ({
+          meta: item.meta,
+          name: item.name,
+          path: item.path,
+        }))
+      : undefined) as RouteRecordNormalized[],
+  };
 }

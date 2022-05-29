@@ -76,6 +76,9 @@ export function treeMapEach(
   }
 }
 
+/**
+ * @description: 从树形结构中找到path路径中满足回调func的节点，为从父级到本身的数组节点
+ */
 export function findPath<T = any>(
   tree: any,
   func: Fn,
