@@ -49,7 +49,8 @@
     setup(props, { emit }) {
       const rootMenuEmitter = mitt();
       const currentActiveName = ref<string | number>('');
-      const openedNames = ref<string[]>([]);
+
+      const openedNames = ref<string[]>([]); //控制popover展开的菜单
 
       // 注入数据
       createSimpleRootMenuContext({
@@ -99,19 +100,35 @@
         rootMenuEmitter.emit('on-update-opened', openedNames.value);
       }
 
-      function addSubMenu() {}
-      function removeSubMenu() {}
+      function addSubMenu(name: string) {
+        if (openedNames.value.includes(name)) return;
+        openedNames.value.push(name);
+        updateOpened();
+      }
+
+      function removeSubMenu(name: string) {
+        openedNames.value = openedNames.value.filter((item) => item !== name);
+        updateOpened();
+      }
+
       function removeAll() {
         openedNames.value = [];
         updateOpened();
       }
-      function sliceIndex() {}
+
+      function sliceIndex(index: number) {
+        if (index === -1) return;
+        openedNames.value = openedNames.value.slice(0, index + 1);
+        updateOpened();
+      }
 
       // 注入如下属性
       provide<SubMenuProvider>(`subMenu:${instance?.uid}`, {
+        //@ts-ignore
         addSubMenu,
+        //@ts-ignore
         removeSubMenu,
-        getOpenNames: () => openedNames.value,
+        getOpenNames: () => openedNames.value, // 获取openedNames，嵌套子菜单使用
         removeAll,
         isRemoveAllPopup,
         sliceIndex,

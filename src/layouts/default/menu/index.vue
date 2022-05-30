@@ -50,6 +50,8 @@
         getMenuTheme,
         getIsHorizontal,
         getSplit,
+        getMenuType,
+        getMenuMode,
       } = useMenuSetting();
 
       // 只有左侧菜单模式需要展示菜单内的logo
@@ -57,6 +59,10 @@
 
       // 菜单主题
       const getComputedMenuTheme = computed(() => props.theme || unref(getMenuTheme));
+
+      const getComputedMenuMode = computed(() =>
+        unref(getIsMobile) ? MenuModeEnum.INLINE : props.menuMode || unref(getMenuMode),
+      );
 
       const getLogoClass = computed(() => {
         return [
@@ -115,7 +121,6 @@
       }
 
       const { menusRef } = useSplitMenu(toRef(props, 'splitType'));
-
       const getCommonProps = computed(() => {
         const menus = unref(menusRef);
         return {
@@ -137,7 +142,14 @@
         return !props.isHorizontal ? (
           <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
         ) : (
-          <BasicMenu />
+          <BasicMenu
+            {...(menuProps as any)}
+            isHorizontal={props.isHorizontal}
+            type={unref(getMenuType)}
+            showLogo={unref(getIsShowLogo)}
+            mode={unref(getComputedMenuMode as any)}
+            items={menus}
+          />
         );
       }
 

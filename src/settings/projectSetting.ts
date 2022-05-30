@@ -78,7 +78,7 @@ const setting: ProjectConfig = {
     theme: ThemeEnum.DARK,
     // 是否分割菜单
     split: false,
-    // Top menu layout
+    // 顶部菜单对齐方式
     topMenuAlign: 'center',
     // 菜单折叠按钮的位置
     trigger: TriggerEnum.HEADER,

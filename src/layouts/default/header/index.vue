@@ -15,7 +15,14 @@
         :sider="false"
       />
     </div>
-    <div :class="`${prefixCls}-menu`">menu</div>
+    <div :class="`${prefixCls}-menu`" v-if="getShowTopMenu && !getIsMobile">
+      <LayoutMenu
+        :isHorizontal="true"
+        :theme="getHeaderTheme"
+        :splitType="getSplitType"
+        :menuMode="getMenuMode"
+      />
+    </div>
     <div :class="`${prefixCls}-action`">
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
     </div> </a-layout-header
@@ -27,12 +34,13 @@
 
   import { AppLogo } from '@/components/Application';
   import LayoutTrigger from '../trigger/index.vue';
+  import LayoutMenu from '../menu/index.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
-
+  import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum';
   import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting';
   import { SettingButtonPositionEnum } from '@/enums/appEnum';
   import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
@@ -42,6 +50,7 @@
     components: {
       AppLogo,
       LayoutTrigger,
+      LayoutMenu,
       SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
         loading: true,
       }),
@@ -55,8 +64,14 @@
 
       const { getHeaderTheme, getShowHeader, getShowHeaderLogo, getShowContent } =
         useHeaderSetting();
-      const { getIsMixMode, getMenuWidth, getShowHeaderTrigger, getSplit, getIsMixSidebar } =
-        useMenuSetting();
+      const {
+        getIsMixMode,
+        getMenuWidth,
+        getShowHeaderTrigger,
+        getSplit,
+        getIsMixSidebar,
+        getShowTopMenu,
+      } = useMenuSetting();
       const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } =
         useRootSetting();
 
@@ -94,6 +109,14 @@
         return { width: `${width}px` };
       });
 
+      const getSplitType = computed(() => {
+        return unref(getSplit) ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE;
+      });
+
+      const getMenuMode = computed(() => {
+        return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null;
+      });
+
       return {
         prefixCls,
         getIsMobile,
@@ -106,6 +129,9 @@
         getShowHeaderTrigger,
         getSplit,
         getIsMixSidebar,
+        getSplitType,
+        getMenuMode,
+        getShowTopMenu,
       };
     },
   });

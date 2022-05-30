@@ -64,6 +64,9 @@ export function useMenuSetting() {
   // 是否固定展开菜单
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
 
+  // 顶部菜单对齐方式
+  const getTopMenuAlign = computed(() => appStore.getMenuSetting.topMenuAlign);
+
   // 菜单类型是否为顶部菜单
   const getIsTopMenu = computed(() => unref(getMenuType) === MenuTypeEnum.TOP_MENU);
 
@@ -137,6 +140,11 @@ export function useMenuSetting() {
   // 折叠菜单时是否显示标题
   const getCollapsedShowTitle = computed(() => appStore.getMenuSetting.collapsedShowTitle);
 
+  // 是否显示顶部菜单
+  const getShowTopMenu = computed(() => {
+    return unref(getMenuMode) === MenuModeEnum.HORIZONTAL || unref(getSplit);
+  });
+
   // 设置projectConfig.menuSetting
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     appStore.setProjectConfig({ menuSetting });
@@ -171,6 +179,8 @@ export function useMenuSetting() {
     getCalcContentWidth,
     getCollapsedShowTitle,
     getAccordion,
+    getShowTopMenu,
+    getTopMenuAlign,
     setMenuSetting,
     toggleCollapsed,
   };
