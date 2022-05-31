@@ -1,6 +1,6 @@
 <template>
   <BasicMenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" />
-  <a-sub-menu v-if="menuHasChildren(item) && getShowMenu">
+  <a-sub-menu v-if="menuHasChildren(item) && getShowMenu" :key="`submenu-${item.path}`">
     <template #title>
       <MenuItemContent v-bind="$props" :item="item" />
     </template>

@@ -1,13 +1,16 @@
 import { defineComponent, unref, computed } from 'vue';
 
 import { AppDarkModeToggle } from '@/components/Application';
-import { TypePicker, ThemeColorPicker } from './components';
+
+import { TypePicker, ThemeColorPicker, SwitchItem } from './components';
+
 import { useI18n } from '@/hooks/web/useI18n';
 import { useRootSetting } from '@/hooks/setting/useRootSetting';
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting';
+import { menuTypeList, HandlerEnum, getMenuTriggerOptions } from './enum';
+import { MenuTypeEnum, TriggerEnum } from '@/enums/menuEnum';
 
-import { menuTypeList, HandlerEnum } from './enum';
 import {
   HEADER_PRESET_BG_COLOR_LIST,
   SIDE_BAR_BG_COLOR_LIST,
@@ -34,12 +37,19 @@ export default defineComponent({
     const { getShowDarkModeToggle, getThemeColor } = useRootSetting();
     const { getHeaderBgColor } = useHeaderSetting();
 
+    // 是否显示菜单
+    const getShowMenuRef = computed(() => {
+      return unref(getShowMenu) && !unref(getIsHorizontal);
+    });
+
     const {
       getMenuType,
       getMenuBgColor,
       getShowSidebar,
       getIsMixSidebar,
       getShowMenu,
+      getTrigger,
+      getSplit,
       getIsHorizontal,
     } = useMenuSetting();
 
@@ -92,6 +102,24 @@ export default defineComponent({
         />
       );
     }
+
+    function renderFeatures() {
+      const triggerDef = unref(getTrigger);
+
+      const triggerOptions = getMenuTriggerOptions(unref(getSplit));
+
+      return (
+        <>
+          <SwitchItem
+            //@ts-ignore
+            title={t('layout.setting.splitMenu')}
+            event={HandlerEnum.MENU_SPLIT}
+            def={unref(getSplit)}
+            disabled={!unref(getShowMenuRef) || unref(getMenuType) !== MenuTypeEnum.MIX}
+          />
+        </>
+      );
+    }
     return () => (
       <a-drawer width="320" v-model:visible={showDrawer.value} title="项目配置">
         {unref(getShowDarkModeToggle) && <a-divider>{t('layout.setting.darkMode')}</a-divider>}
@@ -104,6 +132,9 @@ export default defineComponent({
         {renderHeaderTheme()}
         <a-divider>{t('layout.setting.sidebarTheme')}</a-divider>
         {renderSiderTheme()}
+        <a-divider>{() => t('layout.setting.interfaceFunction')}</a-divider>
+        {renderFeatures()}
+
         <a-button type="primary">按钮</a-button>
       </a-drawer>
     );

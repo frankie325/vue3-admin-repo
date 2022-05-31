@@ -58,6 +58,9 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
     case HandlerEnum.MENU_THEME:
       updateSidebarBgColor(value);
       return { menuSetting: { bgColor: value } };
+
+    case HandlerEnum.MENU_SPLIT:
+      return { menuSetting: { split: value } };
     default:
       return {};
   }

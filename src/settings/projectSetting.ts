@@ -63,7 +63,7 @@ const setting: ProjectConfig = {
     collapsedShowTitle: true,
     // Whether it can be dragged
     // Only limited to the opening of the left menu, the mouse has a drag bar on the right side of the menu
-    canDrag: false,
+    canDrag: true,
     // 是否显示菜单，不会创建DOM
     show: true,
     // 是否隐藏菜单，隐藏DOM
@@ -81,12 +81,12 @@ const setting: ProjectConfig = {
     // 顶部菜单对齐方式
     topMenuAlign: 'center',
     // 菜单折叠按钮的位置
-    trigger: TriggerEnum.HEADER,
+    trigger: TriggerEnum.FOOTER,
     // 是否为手风琴模式，只打开一个菜单
     accordion: false,
-    // Switch page to close menu
+    // 切换页面关闭菜单
     closeMixSidebarOnChange: false,
-    // Module opening method ‘click’ |'hover'
+    // 混合菜单展开时的触发方式
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,
     // 是否固定展开菜单
     mixSideFixed: false,

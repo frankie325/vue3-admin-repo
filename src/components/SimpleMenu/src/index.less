@@ -18,17 +18,21 @@
   }
 
   .collapse-title {
-    width: 100%;
-    padding-left: 8px;
-    padding-right: 4px;
-    overflow: hidden;
+    padding: 0 6px;
     font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
   }
 }
 
 .@{simple-prefix-cls} {
+  &-sub-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
   // MenuTag的样式
   &-tag {
     position: absolute;

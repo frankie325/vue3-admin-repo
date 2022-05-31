@@ -55,6 +55,11 @@ export function useMenuSetting() {
   // 获取菜单背景色
   const getMenuBgColor = computed(() => appStore.getMenuSetting.bgColor);
 
+  // 切换页面关闭菜单
+  const getCloseMixSidebarOnChange = computed(
+    () => appStore.getMenuSetting.closeMixSidebarOnChange,
+  );
+
   // 菜单类型是否为左侧菜单
   const getIsSidebarType = computed(() => unref(getMenuType) === MenuTypeEnum.SIDEBAR);
 
@@ -63,6 +68,9 @@ export function useMenuSetting() {
 
   // 是否固定展开菜单
   const getMixSideFixed = computed(() => appStore.getMenuSetting.mixSideFixed);
+
+  // 混合菜单展开时的触发方式
+  const getMixSideTrigger = computed(() => appStore.getMenuSetting.mixSideTrigger);
 
   // 顶部菜单对齐方式
   const getTopMenuAlign = computed(() => appStore.getMenuSetting.topMenuAlign);
@@ -97,6 +105,8 @@ export function useMenuSetting() {
   const getIsMixSidebar = computed(() => {
     return unref(getMenuType) === MenuTypeEnum.MIX_SIDEBAR;
   });
+
+  const getCanDrag = computed(() => appStore.getMenuSetting.canDrag);
 
   // 是否为顶部菜单混合模式
   const getIsMixMode = computed(() => {
@@ -181,6 +191,12 @@ export function useMenuSetting() {
     getAccordion,
     getShowTopMenu,
     getTopMenuAlign,
+    getTrigger,
+    mixSideHasChildren,
+    getMixSideFixed,
+    getCloseMixSidebarOnChange,
+    getMixSideTrigger,
+    getCanDrag,
     setMenuSetting,
     toggleCollapsed,
   };

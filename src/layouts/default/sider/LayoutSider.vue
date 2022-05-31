@@ -3,37 +3,56 @@
   </div>
   <a-layout-sider
     v-show="showClassSideBarRef"
+    ref="sideRef"
     breakpoint="lg"
+    collapsible
     :class="getSiderClass"
     :width="getMenuWidth"
     :collapsed="getCollapsed"
     :collapsedWidth="getCollapsedWidth"
     :theme="getMenuTheme"
     @breakpoint="onBreakpointChange"
+    v-bind="getTriggerAttr"
   >
+    <template #trigger v-if="getShowTrigger">
+      <LayoutTrigger />
+    </template>
     <LayoutMenu :theme="getMenuTheme" :menuMode="getMode" :splitType="getSplitType" />
+    <DragBar ref="dragBarRef" />
   </a-layout-sider>
 </template>
 <script lang="ts">
   import { computed, defineComponent, ref, unref, CSSProperties, h } from 'vue';
 
   import LayoutMenu from '../menu/index.vue';
+  import LayoutTrigger from '@/layouts/default/trigger/index.vue';
+  import DragBar from './DragBar.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
 
-  import { useSiderEvent } from './useLayoutSider';
+  import { useTrigger, useSiderEvent, useDragLine } from './useLayoutSider';
   import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum';
 
   export default defineComponent({
     name: 'LayoutSideBar',
     components: {
       LayoutMenu,
+      LayoutTrigger,
+      DragBar,
     },
     setup() {
       const { prefixCls } = useDesign('layout-sideBar');
       const { getIsMobile } = useAppInject();
+
+      const dragBarRef = ref<ElRef>(null);
+      const sideRef = ref<ElRef>(null);
+
+      const { getTriggerAttr, getShowTrigger } = useTrigger(getIsMobile);
+
+      // 拖拽以修改菜单容器宽度
+      useDragLine(sideRef, dragBarRef);
 
       const {
         getSplit,
@@ -99,6 +118,10 @@
         getCollapsedWidth,
         getSplitType,
         getMode,
+        getShowTrigger,
+        getTriggerAttr,
+        sideRef,
+        dragBarRef,
         onBreakpointChange,
       };
     },

@@ -82,3 +82,28 @@ export const menuTypeList = [
     type: MenuTypeEnum.MIX_SIDEBAR,
   },
 ];
+
+/**
+ * @description: 获取折叠按钮配置选项
+ */
+export const getMenuTriggerOptions = (hideTop: boolean) => {
+  return [
+    {
+      value: TriggerEnum.NONE,
+      label: t('layout.setting.menuTriggerNone'),
+    },
+    {
+      value: TriggerEnum.FOOTER,
+      label: t('layout.setting.menuTriggerBottom'),
+    },
+    // 分隔菜单时，折叠按钮没有顶部选型
+    ...(hideTop
+      ? []
+      : [
+          {
+            value: TriggerEnum.HEADER,
+            label: t('layout.setting.menuTriggerTop'),
+          },
+        ]),
+  ];
+};

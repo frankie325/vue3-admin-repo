@@ -55,6 +55,9 @@ export function useOpenKeys(
     menuState.openKeys = [];
   }
 
+  /**
+   * @description: 菜单展开关闭时触发
+   */
   function handleOpenChange(openKeys: string[]) {
     if (unref(mode) === MenuModeEnum.HORIZONTAL || !unref(accordion) || unref(getIsMixSidebar)) {
       menuState.openKeys = openKeys;

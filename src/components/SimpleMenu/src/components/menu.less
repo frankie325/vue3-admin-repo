@@ -171,6 +171,15 @@
       }
     }
 
+    &-item > i {
+      margin-right: 6px;
+    }
+
+    &-submenu-title > i,
+    &-submenu-title span > i {
+      margin-right: 8px;
+    }
+
     // MenuItem明亮模式下样式
     &-light&-vertical &-item {
       &-active:not(.@{menu-prefix-cls}-submenu) {
@@ -282,6 +291,26 @@
         }
 
         .@{menu-prefix-cls}-submenu-collapse {
+          background-color: transparent;
+        }
+      }
+    }
+
+    &-dark&-vertical &-submenu &-item {
+      &-active,
+      &-active:hover {
+        color: #fff;
+        border-right: none;
+      }
+    }
+
+    &-dark&-vertical &-child-item-active > &-submenu-title {
+      color: #fff;
+    }
+
+    &-dark&-vertical &-opened {
+      .@{menu-prefix-cls}-submenu-has-parent-submenu {
+        .@{menu-prefix-cls}-submenu-title {
           background-color: transparent;
         }
       }
