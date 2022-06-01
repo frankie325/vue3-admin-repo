@@ -1,6 +1,6 @@
 import { useAppStore } from '@/store/modules/app';
 import { ThemeEnum } from '@/enums/appEnum';
-import { setCssVar } from './utils';
+import { setCssVar } from './util';
 import { colorIsDark, lighten, darken } from '@/utils/color';
 
 const HEADER_BG_COLOR_VAR = '--header-bg-color';

@@ -1,9 +1,15 @@
-import type { ProjectConfig, MenuSetting } from '#/config';
+import type {
+  ProjectConfig,
+  MenuSetting,
+  TransitionSetting,
+  HeaderSetting,
+  MultiTabsSetting,
+} from '#/config';
 
 import { defineStore } from 'pinia';
 import { store } from '@/store';
 
-import { HeaderSetting, MultiTabsSetting } from '#/config';
+import {} from '#/config';
 import { ThemeEnum } from '@/enums/appEnum';
 import { Persistent } from '@/utils/cache/persistent';
 import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '@/enums/cacheEnum';
@@ -45,8 +51,14 @@ export const useAppStore = defineStore({
     getMultiTabsSetting(): MultiTabsSetting {
       return this.getProjectConfig.multiTabsSetting;
     },
+    getTransitionSetting(): TransitionSetting {
+      return this.getProjectConfig.transitionSetting;
+    },
   },
   actions: {
+    setPageLoading(loading: boolean): void {
+      this.pageLoading = loading;
+    },
     // 切换黑暗模式
     setDarkMode(mode: ThemeEnum): void {
       this.darkMode = mode;

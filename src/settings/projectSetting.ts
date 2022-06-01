@@ -32,6 +32,32 @@ const setting: ProjectConfig = {
   showBreadCrumb: true,
   // 是否显示面包屑图标
   showBreadCrumbIcon: false,
+  // 内容宽度模式
+  contentMode: ContentEnum.FULL,
+  // 屏幕自动锁定时间，0不锁定，单位为分钟
+  lockTime: 0,
+  // 是否显示页脚
+  showFooter: false,
+  // 是否开启灰色模式
+  grayMode: false,
+  // 是否开启色弱模式
+  colorWeak: false,
+  // Transition Setting
+  transitionSetting: {
+    //  Whether to open the page switching animation
+    // The disabled state will also disable pageLoading
+    enable: true,
+
+    // Route basic switching animation
+    basicTransition: RouterTransitionEnum.FADE_SIDE,
+
+    // Whether to open page switching loading
+    // Only open when enable=true
+    openPageLoading: true,
+
+    // Whether to open the top progress bar
+    openNProgress: false,
+  },
   headerSetting: {
     // 头部背景颜色
     bgColor: HEADER_PRESET_BG_COLOR_LIST[0],
@@ -49,7 +75,7 @@ const setting: ProjectConfig = {
     showDoc: true,
     // Whether to show the notification button
     showNotice: true,
-    // Whether to display the menu search
+    // 是否展示菜单搜索
     showSearch: true,
   },
   menuSetting: {
@@ -61,8 +87,7 @@ const setting: ProjectConfig = {
     collapsed: false,
     // 折叠菜单时是否显示标题
     collapsedShowTitle: true,
-    // Whether it can be dragged
-    // Only limited to the opening of the left menu, the mouse has a drag bar on the right side of the menu
+    // 侧边菜单是否可以拖拽延伸宽度
     canDrag: true,
     // 是否显示菜单，不会创建DOM
     show: true,
@@ -81,10 +106,10 @@ const setting: ProjectConfig = {
     // 顶部菜单对齐方式
     topMenuAlign: 'center',
     // 菜单折叠按钮的位置
-    trigger: TriggerEnum.FOOTER,
+    trigger: TriggerEnum.HEADER,
     // 是否为手风琴模式，只打开一个菜单
     accordion: false,
-    // 切换页面关闭菜单
+    // 混合菜单切换页面时是否关闭菜单
     closeMixSidebarOnChange: false,
     // 混合菜单展开时的触发方式
     mixSideTrigger: MixSidebarTriggerEnum.CLICK,

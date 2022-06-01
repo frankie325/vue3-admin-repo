@@ -42,6 +42,7 @@ export enum SettingButtonPositionEnum {
   FIXED = 'fixed',
 }
 
+// 内容宽度模式
 export enum ContentEnum {
   // auto width
   FULL = 'full',

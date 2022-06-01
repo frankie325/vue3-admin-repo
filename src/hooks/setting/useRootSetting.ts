@@ -19,10 +19,23 @@ export function useRootSetting() {
   const getThemeColor = computed(() => appStore.getProjectConfig.themeColor);
   // 是否显示logo
   const getShowLogo = computed(() => appStore.getProjectConfig.showLogo);
+  // 内容宽度模式
+  const getContentMode = computed(() => appStore.getProjectConfig.contentMode);
+
   // 是否显示面包屑
   const getShowBreadCrumb = computed(() => appStore.getProjectConfig.showBreadCrumb);
   // 是否显示面包屑图标
   const getShowBreadCrumbIcon = computed(() => appStore.getProjectConfig.showBreadCrumbIcon);
+  // 屏幕自动锁定时间
+  const getLockTime = computed(() => appStore.getProjectConfig.lockTime);
+  // 是否显示页脚
+  const getShowFooter = computed(() => appStore.getProjectConfig.showFooter);
+  // 是否全屏显示内容，不显示菜单
+  const getFullContent = computed(() => appStore.getProjectConfig.fullContent);
+  // 是否开启灰色模式
+  const getGrayMode = computed(() => appStore.getProjectConfig.grayMode);
+  // 是否开启色弱模式
+  const getColorWeak = computed(() => appStore.getProjectConfig.colorWeak);
 
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
@@ -38,6 +51,12 @@ export function useRootSetting() {
     getShowLogo,
     getShowBreadCrumb,
     getShowBreadCrumbIcon,
+    getContentMode,
+    getLockTime,
+    getShowFooter,
+    getFullContent,
+    getGrayMode,
+    getColorWeak,
     setDarkMode,
   };
 }

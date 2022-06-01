@@ -6,6 +6,7 @@ import {
   TriggerEnum,
   MixSidebarTriggerEnum,
 } from '@/enums/menuEnum';
+import { ContentEnum, RouterTransitionEnum } from '@/enums/appEnum';
 
 const { t } = useI18n();
 
@@ -107,3 +108,57 @@ export const getMenuTriggerOptions = (hideTop: boolean) => {
         ]),
   ];
 };
+
+// 混合菜单展开触发方式
+export const mixSidebarTriggerOptions = [
+  {
+    value: MixSidebarTriggerEnum.HOVER,
+    label: t('layout.setting.triggerHover'),
+  },
+  {
+    value: MixSidebarTriggerEnum.CLICK,
+    label: t('layout.setting.triggerClick'),
+  },
+];
+
+// 顶部菜单flex布局方式
+export const topMenuAlignOptions = [
+  {
+    value: TopMenuAlignEnum.CENTER,
+    label: t('layout.setting.topMenuAlignRight'),
+  },
+  {
+    value: TopMenuAlignEnum.START,
+    label: t('layout.setting.topMenuAlignLeft'),
+  },
+  {
+    value: TopMenuAlignEnum.END,
+    label: t('layout.setting.topMenuAlignCenter'),
+  },
+];
+
+// 内容宽度模式
+export const contentModeOptions = [
+  {
+    value: ContentEnum.FULL,
+    label: t('layout.setting.contentModeFull'),
+  },
+  {
+    value: ContentEnum.FIXED,
+    label: t('layout.setting.contentModeFixed'),
+  },
+];
+
+export const routerTransitionOptions = [
+  RouterTransitionEnum.ZOOM_FADE,
+  RouterTransitionEnum.FADE,
+  RouterTransitionEnum.ZOOM_OUT,
+  RouterTransitionEnum.FADE_SIDE,
+  RouterTransitionEnum.FADE_BOTTOM,
+  RouterTransitionEnum.FADE_SCALE,
+].map((item) => {
+  return {
+    label: item,
+    value: item,
+  };
+});

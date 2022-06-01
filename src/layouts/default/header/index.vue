@@ -14,6 +14,7 @@
         :theme="getHeaderTheme"
         :sider="false"
       />
+      <LayoutBreadcrumb v-if="getShowContent && getShowBread" :theme="getHeaderTheme" />
     </div>
     <div :class="`${prefixCls}-menu`" v-if="getShowTopMenu && !getIsMobile">
       <LayoutMenu
@@ -35,6 +36,7 @@
   import { AppLogo } from '@/components/Application';
   import LayoutTrigger from '../trigger/index.vue';
   import LayoutMenu from '../menu/index.vue';
+  import { LayoutBreadcrumb } from './components';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -51,6 +53,7 @@
       AppLogo,
       LayoutTrigger,
       LayoutMenu,
+      LayoutBreadcrumb,
       SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
         loading: true,
       }),
@@ -62,7 +65,7 @@
       const { prefixCls } = useDesign('layout-header');
       const { getIsMobile } = useAppInject();
 
-      const { getHeaderTheme, getShowHeader, getShowHeaderLogo, getShowContent } =
+      const { getHeaderTheme, getShowHeader, getShowHeaderLogo, getShowContent, getShowBread } =
         useHeaderSetting();
       const {
         getIsMixMode,
@@ -132,6 +135,7 @@
         getSplitType,
         getMenuMode,
         getShowTopMenu,
+        getShowBread,
       };
     },
   });

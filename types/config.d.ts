@@ -1,5 +1,6 @@
 import { CacheTypeEnum } from '@/enums/cacheEnum';
 import {
+  ContentEnum,
   PermissionModeEnum,
   SessionTimeoutProcessingEnum,
   SettingButtonPositionEnum,
@@ -43,6 +44,17 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL_PREFIX?: string;
   // Upload url
   VITE_GLOB_UPLOAD_URL?: string;
+}
+
+export interface TransitionSetting {
+  //  Whether to open the page switching animation
+  enable: boolean;
+  // Route basic switching animation
+  basicTransition: RouterTransitionEnum;
+  // Whether to open page switching loading
+  openPageLoading: boolean;
+  // Whether to open the top progress bar
+  openNProgress: boolean;
 }
 
 // 头部设置
@@ -105,6 +117,8 @@ export interface ProjectConfig {
   showBreadCrumb: boolean;
   // 是否显示面包屑图标
   showBreadCrumbIcon: boolean;
+
+  transitionSetting: TransitionSetting;
   // 头部设置
   headerSetting: HeaderSetting;
   // 菜单设置
@@ -121,4 +135,14 @@ export interface ProjectConfig {
   fullContent: false;
   // 会话超时处理方案
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
+  // 内容宽度模式
+  contentMode: ContentEnum;
+  // 屏幕自动锁定时间
+  lockTime: number;
+  // 是否显示页脚
+  showFooter: boolean;
+  // 是否开启灰色模式
+  grayMode: boolean;
+  // 是否开启色弱模式
+  colorWeak: boolean;
 }

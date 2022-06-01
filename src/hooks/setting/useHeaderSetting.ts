@@ -58,6 +58,9 @@ export function useHeaderSetting() {
   // 获取头部背景颜色
   const getHeaderBgColor = computed(() => appStore.getHeaderSetting.bgColor);
 
+  // 是否展示菜单搜索
+  const getShowSearch = computed(() => appStore.getHeaderSetting.showSearch);
+
   // 非左侧菜单模式和非左侧混合菜单模式则显示头部的Logo
   const getShowHeaderLogo = computed(() => {
     return unref(getShowLogo) && !unref(getIsSidebarType) && !unref(getIsMixSidebar);
@@ -70,7 +73,7 @@ export function useHeaderSetting() {
     );
   });
 
-  // 头部面包屑或者头部面包屑为true则getShowContent为true
+  // 头部面包屑或者显示头部折叠按钮为true则getShowContent为true
   const getShowContent = computed(() => {
     return unref(getShowBread) || unref(getShowHeaderTrigger);
   });
@@ -84,5 +87,7 @@ export function useHeaderSetting() {
     getHeaderBgColor,
     getShowHeaderLogo,
     getShowContent,
+    getShowSearch,
+    getShowBread,
   };
 }
