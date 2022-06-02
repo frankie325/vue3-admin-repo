@@ -1,8 +1,9 @@
 import { AppRouteRecordRaw, AppRouteModule } from '@/router/types';
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic';
 
 import { PageEnum } from '@/enums/pageEnum';
+import { mainOutRoutes } from './mainOut';
 
-// 导入modules文件夹下的静态路由
 const modules = import.meta.globEager('./modules/**/*.ts');
 
 const routeModuleList: AppRouteModule[] = [];
@@ -13,7 +14,8 @@ Object.keys(modules).forEach((key) => {
   routeModuleList.push(...modList);
 });
 
-export const asyncRoutes = [...routeModuleList];
+// 导入modules文件夹下的静态路由
+export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
 // 根路由
 export const RootRoute: AppRouteRecordRaw = {
@@ -32,4 +34,10 @@ export const LoginRoute: AppRouteRecordRaw = {
   meta: {},
 };
 
-export const basicRoutes = [LoginRoute, RootRoute];
+export const basicRoutes = [
+  LoginRoute,
+  RootRoute,
+  ...mainOutRoutes,
+  PAGE_NOT_FOUND_ROUTE,
+  REDIRECT_ROUTE,
+];

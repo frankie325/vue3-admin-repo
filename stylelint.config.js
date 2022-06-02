@@ -49,6 +49,7 @@ module.exports = {
     'no-descending-specificity': null,
     'function-no-unknown': null, // 关闭未知函数的错误提示
     'font-family-no-duplicate-names': null, // 关闭重复字体族名称的错误提示
+    'selector-class-pattern': null,
   },
   // 匹配文件，提供配置，能够覆盖常规配置
   overrides: [

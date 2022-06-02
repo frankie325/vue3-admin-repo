@@ -36,6 +36,8 @@ export function useRootSetting() {
   const getGrayMode = computed(() => appStore.getProjectConfig.grayMode);
   // 是否开启色弱模式
   const getColorWeak = computed(() => appStore.getProjectConfig.colorWeak);
+  // 是否显示返回顶部按钮
+  const getUseOpenBackTop = computed(() => appStore.getProjectConfig.useOpenBackTop);
 
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
@@ -57,6 +59,7 @@ export function useRootSetting() {
     getFullContent,
     getGrayMode,
     getColorWeak,
+    getUseOpenBackTop,
     setDarkMode,
   };
 }

@@ -2,11 +2,14 @@
   <div :style="getPlaceholderDomStyle" v-if="getIsShowPlaceholderDom"></div>
   <div :style="getWrapStyle" :class="getClass">
     <LayoutHeader v-if="getShowInsetHeaderRef" />
+    <MultipleTabs v-if="getShowTabs" />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, unref, computed, CSSProperties } from 'vue';
+
   import LayoutHeader from './index.vue';
+  import MultipleTabs from '../tabs/index.vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -22,7 +25,7 @@
 
   export default defineComponent({
     name: 'LayoutMultipleHeader',
-    components: { LayoutHeader },
+    components: { LayoutHeader, MultipleTabs },
     setup() {
       const { setHeaderHeight } = useLayoutHeight();
 
@@ -43,6 +46,10 @@
 
       const { getCalcContentWidth, getSplit } = useMenuSetting();
 
+      // 是否显示标签页
+      const getShowTabs = computed(() => {
+        return unref(getShowMultipleTab) && !unref(getFullContent);
+      });
       const getWrapStyle = computed((): CSSProperties => {
         const style: CSSProperties = {};
         if (unref(getFixed)) {
@@ -101,6 +108,7 @@
         getShowInsetHeaderRef,
         getIsShowPlaceholderDom,
         getPlaceholderDomStyle,
+        getShowTabs,
       };
     },
   });

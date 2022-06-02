@@ -34,6 +34,9 @@ export function removeResizeListener(element: any, fn: () => any) {
   }
 }
 
+/**
+ * @description: 手动触发window的resize事件
+ */
 export function triggerWindowResize() {
   const event = document.createEvent('HTMLEvents');
   event.initEvent('resize', true, true);

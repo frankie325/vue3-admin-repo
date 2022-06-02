@@ -42,6 +42,8 @@ const setting: ProjectConfig = {
   grayMode: false,
   // 是否开启色弱模式
   colorWeak: false,
+  // 是否显示返回顶部按钮
+  useOpenBackTop: true,
   // Transition Setting
   transitionSetting: {
     //  Whether to open the page switching animation
@@ -117,16 +119,17 @@ const setting: ProjectConfig = {
     mixSideFixed: false,
   },
   multiTabsSetting: {
+    // 是否缓存标签页数据
     cache: false,
     // 是否显示标签页
     show: true,
-    // Is it possible to drag and drop sorting tabs
+    // 标签页是否可以拖拽
     canDrag: true,
-    // Turn on quick actions
+    // 是否打开标签页快捷操作
     showQuick: true,
-    // Whether to show the refresh button
+    // 是否显示标签页刷新按钮
     showRedo: true,
-    // Whether to show the collapse button
+    // 是否显示标签页折叠（内容全屏）按钮
     showFold: true,
   },
 

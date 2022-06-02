@@ -1,6 +1,6 @@
 <template>
   <a-layout :class="prefixCls">
-    <!-- <LayoutFeatures /> -->
+    <LayoutFeatures />
     <!-- 顶部混合模式 展示外层的header -->
     <LayoutHeader fixed v-if="getShowFullHeaderRef" />
     <a-layout :class="[layoutClass]">
@@ -31,7 +31,7 @@
   export default defineComponent({
     name: 'LayoutContent',
     components: {
-      // LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
+      LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
       LayoutHeader,
       LayoutSideBar,
       LayoutMultipleHeader,

@@ -24,6 +24,7 @@ export const APP_LOCAL_CACHE_KEY = 'COMMON__LOCAL__KEY__';
 // base global session key
 export const APP_SESSION_CACHE_KEY = 'COMMON__SESSION__KEY__';
 
+// 标签页缓存key
 export const MULTIPLE_TABS_KEY = 'MULTIPLE_TABS__KEY__';
 
 export const APP_DARK_MODE_KEY_ = '__APP__DARK__MODE__';

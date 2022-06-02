@@ -23,8 +23,8 @@ export function configThemePlugin(isBuild: boolean): PluginOption[] {
 
   const plugin = [
     viteThemePlugin({
-      colorVariables: [...themeColors],
-      // colorVariables: [...themeColors, ...colors],
+      // colorVariables: [...themeColors],
+      colorVariables: [...themeColors, ...colors],
     }),
     // 黑暗模式的切换由antdDarkThemePlugin插件实现
     // antdDarkThemePlugin的作用，就是添加属性选择器[data-theme="dark"] .ant-xxx，生成一份ant-design的黑暗主题样式，通过设置html的data-theme属性来实现黑暗模式的切换

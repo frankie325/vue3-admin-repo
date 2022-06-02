@@ -145,4 +145,6 @@ export interface ProjectConfig {
   grayMode: boolean;
   // 是否开启色弱模式
   colorWeak: boolean;
+  // 是否显示返回顶部按钮
+  useOpenBackTop: boolean;
 }

@@ -67,9 +67,6 @@ export function openWindow(
   window.open(url, target, feature.join(','));
 }
 
-/**
- * @description:
- */
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
   if (!route) return route;
   const { matched, ...opt } = route;

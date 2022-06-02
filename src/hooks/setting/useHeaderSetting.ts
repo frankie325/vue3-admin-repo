@@ -78,6 +78,10 @@ export function useHeaderSetting() {
     return unref(getShowBread) || unref(getShowHeaderTrigger);
   });
 
+  function setHeaderSetting(headerSetting: Partial<HeaderSetting>) {
+    appStore.setProjectConfig({ headerSetting });
+  }
+
   return {
     getShowInsetHeaderRef,
     getShowFullHeaderRef,
@@ -89,5 +93,6 @@ export function useHeaderSetting() {
     getShowContent,
     getShowSearch,
     getShowBread,
+    setHeaderSetting,
   };
 }

@@ -39,7 +39,7 @@ export function useGo(_router?: Router) {
 }
 
 /**
- * @description: redo current page
+ * @description: 刷新当前路由页面
  */
 export const useRedo = (_router?: Router) => {
   const { push, currentRoute } = _router || useRouter();
@@ -50,13 +50,17 @@ export const useRedo = (_router?: Router) => {
         resolve(false);
         return;
       }
+      // 将当前路由地址存到params中，给重定向页面使用
       if (name && Object.keys(params).length > 0) {
+        // 使用name跳转
         params['_redirect_type'] = 'name';
         params['path'] = String(name);
       } else {
+        // 使用path跳转
         params['_redirect_type'] = 'path';
         params['path'] = fullPath;
       }
+      // 跳转到重定向页面
       push({ name: REDIRECT_NAME, params, query }).then(() => resolve(true));
     });
   }
