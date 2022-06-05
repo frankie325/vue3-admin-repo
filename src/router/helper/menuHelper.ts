@@ -1,6 +1,8 @@
 import type { MenuModule, Menu, AppRouteRecordRaw } from '@/router/types';
-import { AppRouteModule } from '@/router/types';
+import { RouteParams } from 'vue-router';
+import { toRaw } from 'vue';
 
+import { AppRouteModule } from '@/router/types';
 import { cloneDeep } from 'lodash-es';
 import { findPath, treeMap } from '@/utils/helper/treeHelper';
 import { isUrl } from '@/utils/is';
@@ -82,4 +84,30 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
 
   joinParentPath(menuList);
   return menuList[0];
+}
+
+const menuParamRegex = /(?::)([\s\S]+?)((?=\/)|$)/g;
+/**
+ * @description: 将目标路由params参数拼接到所有菜单的menu.path上
+ * menu.path = 'example/:a/:b' =>  menu.path = example/1/2
+ * 只有params匹配上了，才会替换
+ */
+export function configureDynamicParamsMenu(menu: Menu, params: RouteParams) {
+  const { path, paramPath } = toRaw(menu);
+  let realPath = paramPath ? paramPath : path;
+  const matchArr = realPath.match(menuParamRegex);
+
+  matchArr?.forEach((it) => {
+    const realIt = it.substr(1);
+    if (params[realIt]) {
+      realPath = realPath.replace(`:${realIt}`, params[realIt] as string);
+    }
+  });
+  // 保存原始的path
+  if (!paramPath && matchArr && matchArr.length > 0) {
+    menu.paramPath = path;
+  }
+  menu.path = realPath;
+  // children
+  menu.children?.forEach((item) => configureDynamicParamsMenu(item, params));
 }

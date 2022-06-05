@@ -34,7 +34,6 @@ export interface Menu {
 
   path: string;
 
-  // path contains param, auto assignment.
   paramPath?: string;
 
   disabled?: boolean;

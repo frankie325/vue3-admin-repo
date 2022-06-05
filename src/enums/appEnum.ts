@@ -25,7 +25,7 @@ export enum PermissionModeEnum {
   ROUTE_MAPPING = 'ROUTE_MAPPING',
 }
 
-//  Route switching animation
+// 框架内容切换时动画效果
 export enum RouterTransitionEnum {
   ZOOM_FADE = 'zoom-fade',
   ZOOM_OUT = 'zoom-out',

@@ -70,7 +70,7 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
       updateColorWeak(value);
       return { colorWeak: value };
 
-    // ============transition==================
+    // #######过渡#######
     case HandlerEnum.OPEN_PAGE_LOADING:
       appStore.setPageLoading(false);
       return { transitionSetting: { openPageLoading: value } };

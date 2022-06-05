@@ -14,7 +14,7 @@ Object.keys(modules).forEach((key) => {
   routeModuleList.push(...modList);
 });
 
-// 导入modules文件夹下的静态路由
+// 导入modules文件夹下的路由
 export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
 // 根路由
@@ -31,9 +31,12 @@ export const LoginRoute: AppRouteRecordRaw = {
   path: '/login',
   name: 'Login',
   component: () => import('@/views/sys/login/Login.vue'),
-  meta: {},
+  meta: {
+    title: '登录',
+  },
 };
 
+// 静态路由
 export const basicRoutes = [
   LoginRoute,
   RootRoute,

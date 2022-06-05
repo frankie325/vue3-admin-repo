@@ -73,6 +73,7 @@ export const useMultipleTabStore = defineStore({
         if (!needCache) {
           continue;
         }
+        // 缓存的为路由名称，组件如果想要条件性地被 KeepAlive 缓存，就必须显式声明一个 name 选项
         const name = item.name as string;
         cacheMap.add(name);
       }
@@ -357,5 +358,9 @@ export const useMultipleTabStore = defineStore({
     //     await this.updateCacheTab();
     //   }
     // },
+    resetState(): void {
+      this.tabList = [];
+      this.clearCacheTabs();
+    },
   },
 });

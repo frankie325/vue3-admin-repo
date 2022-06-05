@@ -6,15 +6,15 @@ export function createFakeUserList() {
     {
       userId: '1',
       username: 'admin',
-      realName: 'Super Admin',
-      avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
+      realName: 'Admin',
+      // avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
       desc: 'manager',
       password: '123456',
       token: 'fakeToken1',
       homePath: '/dashboard/analysis',
       roles: [
         {
-          roleName: 'Super Admin',
+          roleName: 'Admin',
           value: 'super',
         },
       ],
@@ -50,6 +50,7 @@ export default [
     url: '/basic-api/login',
     timeout: 200,
     method: 'post',
+    // @ts-ignore
     response: ({ body }) => {
       const { username, password } = body;
       const checkUser = createFakeUserList().find(

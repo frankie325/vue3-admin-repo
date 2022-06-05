@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia';
 import { RouteRecordRaw } from 'vue-router';
-
+import { h } from 'vue';
 import type { UserInfo } from '#/store';
 import { RoleEnum } from '@/enums/roleEnum';
 import { PageEnum } from '@/enums/pageEnum';
 import { LoginParams } from '@/api/sys/userModel';
 import { ErrorMessageMode } from '#/axios';
-import { loginApi, getUserInfo } from '@/api/user';
+import { loginApi, getUserInfo, doLogout } from '@/api/user';
 import { store } from '@/store';
 import { getAuthCache, setAuthCache } from '@/utils/auth';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
@@ -14,6 +14,8 @@ import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 import { isArray } from '@/utils/is';
 import { usePermissionStore } from '@/store/modules/permission';
 import { router } from '@/router';
+import { useMessage } from '@/hooks/web/useMessage';
+import { useI18n } from '@/hooks/web/useI18n';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -75,10 +77,12 @@ export const useUserStore = defineStore({
       this.lastUpdateTime = new Date().getTime();
       setAuthCache(USER_INFO_KEY, info);
     },
+    /**
+     * @description: 设置登录过期
+     */
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
     },
-
     /**
      * @description: 登录操作
      */
@@ -152,7 +156,43 @@ export const useUserStore = defineStore({
       this.setUserInfo(userInfo);
       return userInfo;
     },
-    async logout(goLogin = false) {},
+    /**
+     * @description: 退出登录
+     */
+    async logout(goLogin = false) {
+      if (this.getToken) {
+        try {
+          await doLogout();
+        } catch {
+          console.log('注销Token失败');
+        }
+      }
+
+      // 清空token
+      this.setToken(undefined);
+      this.setSessionTimeout(false);
+      this.setUserInfo(null);
+      goLogin && router.push(PageEnum.BASE_LOGIN);
+    },
+    confirmLoginOut() {
+      const { createConfirm } = useMessage();
+      const { t } = useI18n();
+
+      createConfirm({
+        iconType: 'warning',
+        title: () => h('span', t('sys.app.logoutTip')),
+        content: () => h('span', t('sys.app.logoutMessage')),
+        onOk: async () => {
+          await this.logout(true);
+        },
+      });
+    },
+    resetState() {
+      this.userInfo = null;
+      this.token = '';
+      this.roleList = [];
+      this.sessionTimeout = false;
+    },
   },
 });
 

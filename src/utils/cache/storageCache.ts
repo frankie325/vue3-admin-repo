@@ -89,7 +89,7 @@ export const createStorage = ({
      * @description: 移除所有本地存储
      */
     clear(): void {
-      this.storage.clear;
+      this.storage.clear();
     }
   }
 

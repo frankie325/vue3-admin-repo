@@ -78,6 +78,15 @@ export function useHeaderSetting() {
     return unref(getShowBread) || unref(getShowHeaderTrigger);
   });
 
+  // 是否显示全屏按钮
+  const getShowFullScreen = computed(() => appStore.getHeaderSetting.showFullScreen);
+
+  // 是否使用屏幕锁定功能
+  const getUseLockPage = computed(() => appStore.getHeaderSetting.useLockPage);
+
+  // 是否显示消息通知按钮
+  const getShowNotice = computed(() => appStore.getHeaderSetting.showNotice);
+
   function setHeaderSetting(headerSetting: Partial<HeaderSetting>) {
     appStore.setProjectConfig({ headerSetting });
   }
@@ -93,6 +102,9 @@ export function useHeaderSetting() {
     getShowContent,
     getShowSearch,
     getShowBread,
+    getShowFullScreen,
+    getUseLockPage,
+    getShowNotice,
     setHeaderSetting,
   };
 }

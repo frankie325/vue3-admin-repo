@@ -28,6 +28,7 @@ export function getStorageShortName() {
 export function getAppEnvConfig() {
   const ENV_NAME = getConfigFileName(import.meta.env);
 
+  // 在生产环境下环境变量挂载在window下，实现打包后也能动态修改全局变量
   const ENV = import.meta.env.DEV
     ? (import.meta.env as unknown as GlobEnvConfig)
     : (window[ENV_NAME as any] as unknown as GlobEnvConfig);

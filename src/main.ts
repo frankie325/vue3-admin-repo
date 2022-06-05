@@ -14,6 +14,7 @@ import { setupI18n } from '@/locales/setupI18n';
 import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
+import { setupGlobDirectives } from '@/directives';
 
 async function bootstrap() {
   const app = createApp(App);
@@ -33,6 +34,9 @@ async function bootstrap() {
   // 注册路由
   setupRouter(app);
   setupRouterGuard(router);
+
+  // 注册全局自定义指令
+  setupGlobDirectives(app);
 
   app.mount('#app');
 }

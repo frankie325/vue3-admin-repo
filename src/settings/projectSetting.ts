@@ -44,19 +44,23 @@ const setting: ProjectConfig = {
   colorWeak: false,
   // 是否显示返回顶部按钮
   useOpenBackTop: true,
+  // 是否开启KeepAlive缓存，最好在开发环境下关闭，否则缓存每次都要清除
+  openKeepAlive: true,
+  // 框架内是否允许内嵌页面
+  canEmbedIFramePage: true,
+  // 路由切换时，是否删除未关闭的 messages 和 notify
+  closeMessageOnSwitch: true,
+  // 路由切换时，是否取消前一个路由页面的请求
+  removeAllHttpPending: false,
+
   // Transition Setting
   transitionSetting: {
-    //  Whether to open the page switching animation
-    // The disabled state will also disable pageLoading
+    // 是否启用框架内页面切换时动画效果
     enable: true,
-
-    // Route basic switching animation
+    // 框架内页面切换时动画效果
     basicTransition: RouterTransitionEnum.FADE_SIDE,
-
-    // Whether to open page switching loading
-    // Only open when enable=true
+    // 框架内容是否启用加载动画
     openPageLoading: true,
-
     // Whether to open the top progress bar
     openNProgress: false,
   },
@@ -69,13 +73,11 @@ const setting: ProjectConfig = {
     show: true,
     // 头部主题，会跟随系统主题，也由头部颜色深浅来决定
     theme: ThemeEnum.LIGHT,
-    // Whether to enable the lock screen function
+    // 是否使用屏幕锁定功能
     useLockPage: true,
-    // Whether to show the full screen button
+    // 是否显示全屏按钮
     showFullScreen: true,
-    // Whether to show the document button
-    showDoc: true,
-    // Whether to show the notification button
+    // 是否显示消息通知按钮
     showNotice: true,
     // 是否展示菜单搜索
     showSearch: true,

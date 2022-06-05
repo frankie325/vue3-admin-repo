@@ -1,10 +1,12 @@
 import { computed } from 'vue';
 import { useAppStore } from '@/store/modules/app';
-import { ThemeEnum } from '@/enums/appEnum';
+import { ContentEnum, ThemeEnum } from '@/enums/appEnum';
 
 export function useRootSetting() {
   const appStore = useAppStore();
 
+  // 加载动画
+  const getPageLoading = computed(() => appStore.getPageLoading);
   // 是否显示项目设置按钮
   const getShowSettingButton = computed(() => appStore.getProjectConfig.showSettingButton);
   // 项目设置按钮的位置
@@ -38,6 +40,16 @@ export function useRootSetting() {
   const getColorWeak = computed(() => appStore.getProjectConfig.colorWeak);
   // 是否显示返回顶部按钮
   const getUseOpenBackTop = computed(() => appStore.getProjectConfig.useOpenBackTop);
+  // 内容宽度模式
+  const getLayoutContentMode = computed(() =>
+    appStore.getProjectConfig.contentMode === ContentEnum.FULL
+      ? ContentEnum.FULL
+      : ContentEnum.FIXED,
+  );
+  // 是否开启KeepAlive缓存
+  const getOpenKeepAlive = computed(() => appStore.getProjectConfig.openKeepAlive);
+  // 框架内是否允许内嵌页面
+  const getCanEmbedIFramePage = computed(() => appStore.getProjectConfig.canEmbedIFramePage);
 
   function setDarkMode(mode: ThemeEnum) {
     appStore.setDarkMode(mode);
@@ -60,6 +72,10 @@ export function useRootSetting() {
     getGrayMode,
     getColorWeak,
     getUseOpenBackTop,
+    getPageLoading,
+    getLayoutContentMode,
+    getOpenKeepAlive,
+    getCanEmbedIFramePage,
     setDarkMode,
   };
 }

@@ -31,3 +31,10 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
 export function getUserInfo() {
   return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
 }
+
+/**
+ * @description: 退出登录
+ */
+export function doLogout() {
+  return defHttp.get({ url: Api.Logout });
+}

@@ -47,14 +47,14 @@ export function useTabs(_router?: Router) {
     await tabStore.setTabTitle(title, targetTab);
   }
   // 更新标签页path
-  async function updateTabPath(path: string, tab?: RouteLocationNormalized) {
-    const canIUse = canIUseTabs;
-    if (!canIUse) {
-      return;
-    }
-    const targetTab = tab || getCurrentTab();
-    await tabStore.updateTabPath(path, targetTab);
-  }
+  // async function updateTabPath(path: string, tab?: RouteLocationNormalized) {
+  //   const canIUse = canIUseTabs;
+  //   if (!canIUse) {
+  //     return;
+  //   }
+  //   const targetTab = tab || getCurrentTab();
+  //   await tabStore.updateTabPath(path, targetTab);
+  // }
 
   async function handleTabAction(action: TableActionEnum, tab?: RouteLocationNormalized) {
     const canIUse = canIUseTabs;

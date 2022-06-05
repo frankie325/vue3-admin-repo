@@ -3,6 +3,7 @@ import type { ProjectConfig } from '#/config';
 import type { RouteLocationNormalized } from 'vue-router';
 
 import { toRaw } from 'vue';
+import { pick, omit } from 'lodash-es';
 
 import { Memory } from './memory';
 import { DEFAULT_CACHE_TIME } from '@/settings/encryptionSetting';
@@ -41,6 +42,16 @@ const ss = createSessionStorage();
 const localMemory = new Memory(DEFAULT_CACHE_TIME);
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
+/**
+ * @description: 初始时拿到旧缓存
+ */
+function initPersistentMemory() {
+  const localCache = ls.get(APP_LOCAL_CACHE_KEY);
+  const sessionCache = ss.get(APP_SESSION_CACHE_KEY);
+  localCache && localMemory.resetCache(localCache);
+  sessionCache && sessionMemory.resetCache(sessionCache);
+}
+
 export class Persistent {
   /**
    * @description: 获取缓存
@@ -59,6 +70,20 @@ export class Persistent {
   }
 
   /**
+   * @description: 移除缓存
+   */
+  static removeLocal(key: LocalKeys, immediate = false): void {
+    localMemory.remove(key);
+    immediate && ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache);
+  }
+  /**
+   * @description: 清空缓存
+   */
+  static clearLocal(immediate = false): void {
+    localMemory.clear();
+    immediate && ls.clear();
+  }
+  /**
    * @description: 获取缓存
    */
   static getSession<T>(key: SessionKeys) {
@@ -73,4 +98,61 @@ export class Persistent {
     sessionMemory.set(key, toRaw(value));
     immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
   }
+
+  static removeSession(key: SessionKeys, immediate = false): void {
+    sessionMemory.remove(key);
+    immediate && ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache);
+  }
+
+  static clearSession(immediate = false): void {
+    sessionMemory.clear();
+    immediate && ss.clear();
+  }
+
+  /**
+   * @description: 清除所有缓存
+   */
+  static clearAll(immediate = false) {
+    sessionMemory.clear();
+    localMemory.clear();
+    if (immediate) {
+      ls.clear();
+      ss.clear();
+    }
+  }
 }
+
+window.addEventListener('beforeunload', function () {
+  // TOKEN_KEY 在登录或注销时已经写入到storage了，此处为了解决同时打开多个窗口时token不同步的问题
+  // LOCK_INFO_KEY 在锁屏和解锁时写入，此处也不应修改
+  ls.set(APP_LOCAL_CACHE_KEY, {
+    ...omit(localMemory.getCache, LOCK_INFO_KEY),
+    ...pick(ls.get(APP_LOCAL_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY]),
+  });
+  ss.set(APP_SESSION_CACHE_KEY, {
+    ...omit(sessionMemory.getCache, LOCK_INFO_KEY),
+    ...pick(ss.get(APP_SESSION_CACHE_KEY), [TOKEN_KEY, USER_INFO_KEY, LOCK_INFO_KEY]),
+  });
+});
+
+function storageChange(e: any) {
+  const { key, newValue, oldValue } = e;
+
+  if (!key) {
+    Persistent.clearAll();
+    return;
+  }
+
+  if (!!newValue && !!oldValue) {
+    if (APP_LOCAL_CACHE_KEY === key) {
+      Persistent.clearLocal();
+    }
+    if (APP_SESSION_CACHE_KEY === key) {
+      Persistent.clearSession();
+    }
+  }
+}
+
+window.addEventListener('storage', storageChange);
+
+initPersistentMemory();

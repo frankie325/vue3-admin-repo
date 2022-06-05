@@ -52,7 +52,7 @@
     direction: {
       type: String,
       default: 'vertical',
-      validator: (v) => ['vertical', 'horizontal'].includes(v),
+      validator: (v: string) => ['vertical', 'horizontal'].includes(v),
     },
     /**
      * The label name of the outer container that wraps the component

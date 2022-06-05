@@ -7,10 +7,9 @@
       <LayoutSideBar v-if="getShowSidebar || getIsMobile" />
       <a-layout :class="`${prefixCls}-main`">
         <LayoutMultipleHeader />
-        <router-view></router-view>
+        <LayoutContent />
       </a-layout>
     </a-layout>
-    <!-- <LayoutContent /> -->
   </a-layout>
 </template>
 
@@ -29,13 +28,13 @@
   import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
 
   export default defineComponent({
-    name: 'LayoutContent',
+    name: 'DefaultLayout',
     components: {
       LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
       LayoutHeader,
       LayoutSideBar,
       LayoutMultipleHeader,
-      // LayoutContent,
+      LayoutContent,
     },
     setup() {
       const { prefixCls } = useDesign('default-layout');

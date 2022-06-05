@@ -1,6 +1,6 @@
 <template>
   <a-menu-item :key="item.path">
-    <MenuItemContent v-bind="$props" :item="item" />
+    <MenuItemContent v-bind="$props" :abc="1123" :item="item" />
   </a-menu-item>
 </template>
 <script lang="ts">

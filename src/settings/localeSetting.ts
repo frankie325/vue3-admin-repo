@@ -19,18 +19,18 @@ export const localeSetting: LocaleSetting = {
 };
 
 export interface LocaleMenu {
-  name: string;
-  value: string;
+  text: string;
+  event: string;
 }
 
 // 下拉菜单的切换语言选项
 export const localeList: LocaleMenu[] = [
   {
-    name: '简体中文',
-    value: LOCALE.ZH_CN,
+    text: '简体中文',
+    event: LOCALE.ZH_CN,
   },
   {
-    name: 'English',
-    value: LOCALE.EN_US,
+    text: 'English',
+    event: LOCALE.EN_US,
   },
 ];

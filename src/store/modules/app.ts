@@ -8,7 +8,7 @@ import type {
 
 import { defineStore } from 'pinia';
 import { store } from '@/store';
-
+import { resetRouter } from '@/router';
 import {} from '#/config';
 import { ThemeEnum } from '@/enums/appEnum';
 import { Persistent } from '@/utils/cache/persistent';
@@ -17,11 +17,12 @@ import { deepMerge } from '@/utils';
 import { darkMode } from '@/settings/designSetting';
 interface AppState {
   darkMode?: ThemeEnum;
-  // Page loading status
   pageLoading: boolean;
   // 项目配置
   projectConfig: ProjectConfig | null;
 }
+
+let timeId: TimeoutHandle;
 
 export const useAppStore = defineStore({
   id: 'app',
@@ -54,6 +55,9 @@ export const useAppStore = defineStore({
     getTransitionSetting(): TransitionSetting {
       return this.getProjectConfig.transitionSetting;
     },
+    getPageLoading(): boolean {
+      return this.pageLoading;
+    },
   },
   actions: {
     setPageLoading(loading: boolean): void {
@@ -68,6 +72,25 @@ export const useAppStore = defineStore({
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config);
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
+    },
+    /**
+     * @description: 路由切换时，设置loading状态
+     */
+    async setPageLoadingAction(loading: boolean): Promise<void> {
+      if (loading) {
+        clearTimeout(timeId);
+        // 防止页面闪烁
+        timeId = setTimeout(() => {
+          this.setPageLoading(loading);
+        }, 50);
+      } else {
+        this.setPageLoading(loading);
+        clearTimeout(timeId);
+      }
+    },
+    async resetAllState() {
+      resetRouter();
+      Persistent.clearAll();
     },
   },
 });

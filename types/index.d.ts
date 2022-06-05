@@ -15,3 +15,5 @@ declare type LabelValueOptions = {
   value: any;
   [key: string]: string | number | boolean;
 }[];
+
+declare type RefType<T> = T | null;

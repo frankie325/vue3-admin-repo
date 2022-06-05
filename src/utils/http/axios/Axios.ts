@@ -67,6 +67,7 @@ export class VAxios {
 
     // 响应拦截器
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
+      res && axiosCanceler.removePending(res.config); //  响应成功后，移除取消请求的方法
       if (responseInterceptors && isFunction(responseInterceptors)) {
         res = responseInterceptors(res);
       }

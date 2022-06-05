@@ -25,9 +25,23 @@
       />
     </div>
     <div :class="`${prefixCls}-action`">
+      <ErrorAction v-if="getUseErrorHandle" :class="`${prefixCls}-action__item error-action`" />
+
+      <FullScreen v-if="getShowFullScreen" :class="`${prefixCls}-action__item fullscreen-item`" />
+
+      <AppLocalePicker
+        v-if="getShowLocalePicker"
+        :reload="true"
+        :showText="false"
+        :class="`${prefixCls}-action__item`"
+      />
+
+      <UserDropDown :theme="getHeaderTheme" />
+
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
-    </div> </a-layout-header
-></template>
+    </div>
+  </a-layout-header>
+</template>
 
 <script lang="ts">
   import { defineComponent, unref, computed } from 'vue';
@@ -36,8 +50,10 @@
   import { AppLogo } from '@/components/Application';
   import LayoutTrigger from '../trigger/index.vue';
   import LayoutMenu from '../menu/index.vue';
-  import { LayoutBreadcrumb } from './components';
+  import { LayoutBreadcrumb, ErrorAction, FullScreen, UserDropDown } from './components';
+  import { AppLocalePicker } from '@/components/Application';
 
+  import { useLocale } from '@/locales/useLocale';
   import { useDesign } from '@/hooks/web/useDesign';
   import { useAppInject } from '@/hooks/web/useAppInject';
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
@@ -54,6 +70,10 @@
       LayoutTrigger,
       LayoutMenu,
       LayoutBreadcrumb,
+      ErrorAction,
+      FullScreen,
+      AppLocalePicker,
+      UserDropDown,
       SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
         loading: true,
       }),
@@ -65,8 +85,16 @@
       const { prefixCls } = useDesign('layout-header');
       const { getIsMobile } = useAppInject();
 
-      const { getHeaderTheme, getShowHeader, getShowHeaderLogo, getShowContent, getShowBread } =
-        useHeaderSetting();
+      const { getShowLocalePicker } = useLocale();
+
+      const {
+        getHeaderTheme,
+        getShowHeader,
+        getShowHeaderLogo,
+        getShowContent,
+        getShowBread,
+        getShowFullScreen,
+      } = useHeaderSetting();
       const {
         getIsMixMode,
         getMenuWidth,
@@ -136,6 +164,9 @@
         getMenuMode,
         getShowTopMenu,
         getShowBread,
+        getUseErrorHandle,
+        getShowFullScreen,
+        getShowLocalePicker,
       };
     },
   });

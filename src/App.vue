@@ -1,5 +1,4 @@
 <template>
-  <!-- <StudyVue3 /> -->
   <a-config-provider :locale="getAntdLocale">
     <AppProvider>
       <router-view />
@@ -8,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-  import StudyVue3 from './study/index.vue';
   import { AppProvider } from '@/components/Application';
   import { useLocale } from '@/locales/useLocale';
   // import { defHttp } from '@/utils/http/axios';

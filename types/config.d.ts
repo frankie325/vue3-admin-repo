@@ -65,7 +65,6 @@ export interface HeaderSetting {
   theme: ThemeEnum;
   showFullScreen: boolean;
   useLockPage: boolean;
-  showDoc: boolean;
   showNotice: boolean;
   showSearch: boolean;
 }
@@ -117,7 +116,7 @@ export interface ProjectConfig {
   showBreadCrumb: boolean;
   // 是否显示面包屑图标
   showBreadCrumbIcon: boolean;
-
+  // 框架内页面切换动画设置
   transitionSetting: TransitionSetting;
   // 头部设置
   headerSetting: HeaderSetting;
@@ -147,4 +146,12 @@ export interface ProjectConfig {
   colorWeak: boolean;
   // 是否显示返回顶部按钮
   useOpenBackTop: boolean;
+  // 是否开启KeepAlive缓存
+  openKeepAlive: boolean;
+  // 框架内是否允许内嵌页面
+  canEmbedIFramePage: boolean;
+  // 路由切换时，是否删除未关闭的 messages 和 notify
+  closeMessageOnSwitch: boolean;
+  // 路由切换时，是否取消前一个路由页面的请求
+  removeAllHttpPending: boolean;
 }

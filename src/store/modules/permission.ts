@@ -18,6 +18,7 @@ import { ERROR_LOG_ROUTE, PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 import { getMenuList } from '@/api/sys/menu';
 import { getPermCode } from '@/api/sys/user';
 import { useMessage } from '@/hooks/web/useMessage';
+import { PageEnum } from '@/enums/pageEnum';
 
 interface PermissionState {
   // 后台动态获取的权限列表，与roleList模式一致
@@ -109,7 +110,36 @@ export const usePermissionStore = defineStore({
         return !ignoreRoute;
       };
 
-      const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {};
+      /**
+       * @description 根据设置的首页path，修正routes中的affix标记（固定首页）
+       * path与homePath相等，则会设置affix属性
+       **/
+      const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
+        if (!routes || routes.length === 0) return;
+        let homePath: string = userStore.getUserInfo.homePath || PageEnum.BASE_HOME;
+        function patcher(routes: AppRouteRecordRaw[], parentPath = '') {
+          if (parentPath) parentPath = parentPath + '/';
+          routes.forEach((route: AppRouteRecordRaw) => {
+            const { path, children, redirect } = route;
+            const currentPath = path.startsWith('/') ? path : parentPath + path;
+            if (currentPath === homePath) {
+              if (redirect) {
+                homePath = route.redirect! as string;
+              } else {
+                route.meta = Object.assign({}, route.meta, { affix: true });
+                throw new Error('end');
+              }
+            }
+            children && children.length > 0 && patcher(children, currentPath);
+          });
+        }
+        try {
+          patcher(routes);
+        } catch (e) {
+          // 已处理完毕跳出循环
+        }
+        return;
+      };
 
       switch (permissionMode) {
         // 1.前端写死路由
@@ -170,6 +200,12 @@ export const usePermissionStore = defineStore({
       routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
+    },
+    resetState(): void {
+      this.isDynamicAddedRoute = false;
+      this.permCodeList = [];
+      this.backMenuList = [];
+      this.lastBuildMenuTime = 0;
     },
   },
 });
