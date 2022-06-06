@@ -11,8 +11,8 @@ const dashboard: AppRouteModule = {
   meta: {
     orderNo: 10,
     icon: 'ion:grid-outline',
-    // title: t('routes.dashboard.dashboard'),
-    title: '控制面板控制面板控制面板',
+    title: t('routes.dashboard.dashboard'),
+    // title: '控制面板控制面板控制面板',
     // single: true,
   },
   children: [

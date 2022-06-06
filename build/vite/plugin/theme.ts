@@ -21,11 +21,44 @@ export function configThemePlugin(isBuild: boolean): PluginOption[] {
   // 生成默认主题和暗黑主题的主色
   const themeColors = getThemeColors();
 
+  const vite_theme_plugin = viteThemePlugin({
+    resolveSelector: (s) => {
+      s = s.trim();
+      switch (s) {
+        case '.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon':
+          return '.ant-steps-item-icon > .ant-steps-icon';
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)':
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover':
+        case '.ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active':
+          return s;
+        case '.ant-steps-item-icon > .ant-steps-icon':
+          return s;
+        case '.ant-select-item-option-selected:not(.ant-select-item-option-disabled)':
+          return s;
+        default:
+          if (s.indexOf('.ant-btn') >= -1) {
+            // 按钮被重新定制过，需要过滤掉class防止覆盖
+            return s;
+          }
+      }
+      return s.startsWith('[data-theme') ? s : `[data-theme] ${s}`;
+    },
+    // colorVariables: [...themeColors],
+    colorVariables: [...themeColors, ...colors],
+  });
+
+  vite_theme_plugin.forEach(function (item) {
+    //对vite:theme插件特殊配置
+    if ('vite:theme' === item.name) {
+      // 打包时去除enforce: "post"，vite 2.6.x适配，否则生成app-theme-style为空，因为async transform(code, id) {的code没有正确获取
+      if (isBuild) {
+        delete item.enforce;
+      }
+      //console.log(item);
+    }
+  });
   const plugin = [
-    viteThemePlugin({
-      // colorVariables: [...themeColors],
-      colorVariables: [...themeColors, ...colors],
-    }),
+    vite_theme_plugin,
     // 黑暗模式的切换由antdDarkThemePlugin插件实现
     // antdDarkThemePlugin的作用，就是添加属性选择器[data-theme="dark"] .ant-xxx，生成一份ant-design的黑暗主题样式，通过设置html的data-theme属性来实现黑暗模式的切换
     antdDarkThemePlugin({

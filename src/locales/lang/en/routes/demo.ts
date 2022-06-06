@@ -151,7 +151,7 @@ export default {
   },
   permission: {
     permission: 'Permission',
-
+    dynamicPermission: 'Dynamic Permission',
     front: 'front-end',
     frontPage: 'Page',
     frontBtn: 'Button',

@@ -3,6 +3,13 @@ import path from 'path';
 import dotenv from 'dotenv';
 
 /**
+ * @description 打包分析时用到，执行npm run report，进行打包分析
+ */
+export function isReportMode(): boolean {
+  return process.env.REPORT === 'true';
+}
+
+/**
  * @description: 将环境变量值为字符串的添加到process.env中
  * @return {*} 返回该项目对应环境下的所有定义的环境变量，转为js值
  */

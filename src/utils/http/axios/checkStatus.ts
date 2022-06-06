@@ -28,13 +28,15 @@ export function checkStatus(
     // 401: Not logged in
     // Jump to the login page if not logged in, and carry the path of the current page
     // Return to the current page after successful login. This step needs to be operated on the login page.
-    // token超时的处理
+    // token失效时的处理
     case 401:
       userStore.setToken(undefined);
       errMessage = msg || t('sys.api.errMsg401');
       if (stp === SessionTimeoutProcessingEnum.PAGE_COVERAGE) {
+        // 使用登录页覆盖的方式
         userStore.setSessionTimeout(true);
       } else {
+        // 退出到登录页登录的方式
         userStore.logout(true);
       }
       break;

@@ -135,11 +135,14 @@ const setting: ProjectConfig = {
     showFold: true,
   },
 
+  // 权限本地存储类型
   permissionCacheType: CacheTypeEnum.LOCAL,
 
+  // token失效时的登录页显示方式
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum.ROUTE_JUMP,
 
-  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
+  // 权限模式
+  permissionMode: PermissionModeEnum.BACK,
 };
 
 export default setting;
