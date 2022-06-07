@@ -16,9 +16,6 @@ export interface UseEventParams {
 
 /**
  * @description: 注册监听事件方法
- */
-/**
- * @description: 注册监听事件方法
  * @return {*} 返回移除监听事件的方法
  */
 export function useEventListener({
