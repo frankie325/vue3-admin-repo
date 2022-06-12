@@ -15,6 +15,15 @@ export interface CreateCallbackParams {
   sizeEnum: typeof sizeEnum;
 }
 
+export function useBreakpoint() {
+  return {
+    screenRef: computed(() => unref(globalScreenRef)),
+    widthRef: globalWidthRef,
+    screenEnum,
+    realWidthRef: globalRealWidthRef,
+  };
+}
+
 /**
  * @description: 监听浏览器宽度的变化，将值保存在全局变量中
  */

@@ -2,6 +2,9 @@ import { ref, watch } from 'vue';
 import { tryOnUnmounted } from '@vueuse/core';
 import { isFunction } from '@/utils/is';
 
+/**
+ * @description: 使用setTimeout，执行完后或者组件销毁时自动清除该计时器
+ */
 export function useTimeoutFn(handle: Fn<any>, wait: number, native = false) {
   if (!isFunction(handle)) {
     throw new Error('handle is not Function!');
