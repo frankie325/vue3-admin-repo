@@ -42,7 +42,7 @@ export function getAppEnvConfig() {
   } = ENV;
 
   // VITE_GLOB_APP_SHORT_NAME只能由数字字母下划线组成
-  if (!/^[a-zA-z\_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
+  if (!/^[0-9a-zA-z\_]*$/.test(VITE_GLOB_APP_SHORT_NAME)) {
     warn(
       'VITE_GLOB_APP_SHORT_NAME Variables can only be characters/underscores, please modify in the environment variables and re-running.',
     );

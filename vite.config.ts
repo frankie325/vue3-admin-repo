@@ -27,6 +27,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     base: VITE_PUBLIC_PATH,
+    root,
     resolve: {
       alias: [
         // 关闭使用vue-i18n.esm-bundle.js的警告
@@ -53,6 +54,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
       },
     },
+    esbuild: {
+      pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
+    },
     server: {
       // https: true,
       host: true,
@@ -63,9 +67,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       target: 'es2015',
       cssTarget: 'chrome80',
       outDir: OUTPUT_DIR,
+      brotliSize: false,
+      chunkSizeWarningLimit: 2000,
     },
     optimizeDeps: {
       // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
+      // 预构建下列包
       include: [
         '@vue/runtime-core',
         '@vue/shared',

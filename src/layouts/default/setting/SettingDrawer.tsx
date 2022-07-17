@@ -8,6 +8,7 @@ import {
   SwitchItem,
   SelectItem,
   InputNumberItem,
+  SettingFooter,
 } from './components';
 
 import { useI18n } from '@/hooks/web/useI18n';
@@ -458,6 +459,8 @@ export default defineComponent({
         {renderContent()}
         <a-divider>{() => t('layout.setting.animation')}</a-divider>
         {renderTransition()}
+        <a-divider />
+        <SettingFooter />
       </a-drawer>
     );
   },

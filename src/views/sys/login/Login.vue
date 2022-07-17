@@ -3,9 +3,11 @@
     <AppLocalePicker
       v-if="showLocale"
       class="absolute text-black top-4 right-4 enter-x xl:text-gray-600"
+      :showText="false"
     ></AppLocalePicker>
 
-    <AppDarkModeToggle />
+    <AppDarkModeToggle class="absolute top-3 right-10 enter-x" />
+
     <div class="container mx-auto h-full py-2 sm:py-10">
       <div class="flex h-full">
         <div></div>

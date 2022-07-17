@@ -11,12 +11,12 @@
 
     <template #overlay>
       <a-menu @click="handleMenuClick">
-        <a-menu-item v-if="getUseLockPage" key="lock">
+        <!-- <a-menu-item v-if="getUseLockPage" key="lock">
           <template #icon>
             <Icon icon="ion:lock-closed-outline" />
           </template>
           <span>{{ t('layout.header.tooltipLock') }}</span>
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-divider />
         <a-menu-item key="logout">
           <template #icon>

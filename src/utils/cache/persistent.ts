@@ -111,6 +111,7 @@ export class Persistent {
 
   /**
    * @description: 清除所有缓存
+   * @param immediate 为true，才会清除本队缓存
    */
   static clearAll(immediate = false) {
     sessionMemory.clear();
